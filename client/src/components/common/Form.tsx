@@ -121,7 +121,7 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("address", { required: true })}
+              {...register("zip_code", { required: true })}
             />
           </FormControl>
 

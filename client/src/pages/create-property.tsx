@@ -4,7 +4,7 @@ import { FieldValues, useForm } from "@pankod/refine-react-hook-form"
 import Form from "components/common/Form"
 
 const CreateProperty = () => {
-  const { data } = useGetIdentity()
+  const { data: user } = useGetIdentity()
   const {
     refineCore: { onFinish, formLoading },
     register,
@@ -13,7 +13,8 @@ const CreateProperty = () => {
 
   const onFinishHandler = async (data: FieldValues) => {
     await onFinish({
-      ...data
+      ...data,
+      email: user.email
     })
   }
 
