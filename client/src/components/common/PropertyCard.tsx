@@ -10,12 +10,11 @@ import {
 
 import { PropertyCardProps } from "interfaces/property"
 
-import { mockPropertyPhoto } from "assets"
-
 const PropertyCard = ({
   id,
   name,
-  city
+  city,
+  photo
 }: PropertyCardProps) => {
   return (
     <Card
@@ -35,7 +34,7 @@ const PropertyCard = ({
         component="img"
         width="100%"
         height={210}
-        image={mockPropertyPhoto}
+        image={photo}
         alt="card image"
         sx={{ borderRadius: "10px" }}
       />

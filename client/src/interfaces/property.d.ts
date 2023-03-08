@@ -11,4 +11,5 @@ export interface PropertyCardProps {
   id?: BaseKey | undefined
   name: string
   city: string
+  photo: string
 }

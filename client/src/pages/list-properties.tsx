@@ -142,6 +142,7 @@ const ListProperties = () => {
             id={property._id}
             name={property.name}
             city={property.city}
+            photo={property.photo}
           />
         ))}
       </Box>

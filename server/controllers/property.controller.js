@@ -2,6 +2,16 @@ import Property from "../mongodb/models/property.js"
 import User from "../mongodb/models/user.js"
 
 import mongoose from "mongoose"
+import * as dotenv from "dotenv"
+import { v2 as cloudinary } from "cloudinary"
+
+dotenv.config()
+
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET
+})
 
 const getAllProperties = async (req, res) => {
   const {
@@ -60,7 +70,8 @@ const createProperty = async (req, res) => {
       city,
       address,
       zip_code,
-      email
+      email,
+      photo
     } = req.body
 
     const session = await mongoose.startSession()
@@ -70,11 +81,14 @@ const createProperty = async (req, res) => {
 
     if (!user) throw new Error("User not found")
 
+    const photoUrl = await cloudinary.uploader.upload(photo)
+
     const newProperty = await Property.create({
       name,
       city,
       address,
       zip_code,
+      photo: photoUrl.url,
       created_by: user._id
     })
 
@@ -91,7 +105,7 @@ const createProperty = async (req, res) => {
 const updateProperty = async (req, res) => {
   try {
     const { id } = req.params
-    const { name, city, address, zip_code } = req.body
+    const { name, city, address, zip_code, photo } = req.body
 
     await Property.findByIdAndUpdate(
       { _id: id },
@@ -99,7 +113,8 @@ const updateProperty = async (req, res) => {
         name,
         city,
         address,
-        zip_code
+        zip_code,
+        photo: photoUrl.url || photo
       }
     )
 
