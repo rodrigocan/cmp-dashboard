@@ -1,8 +1,26 @@
-import React from 'react'
+import { useGetIdentity, useOne } from "@pankod/refine-core"
+
+import Profile from "components/common/Profile"
 
 const MyProfile = () => {
+  const { data: user } = useGetIdentity()
+  const { data, isLoading, isError } = useOne({
+    resource: "users",
+    id: user?.userid
+  })
+
+  const myProfile = data?.data ?? []
+
+  if (isLoading) return <div>Carregando...</div>
+  if (isError) return <div>Erro</div>
+
   return (
-    <div>MyProfile</div>
+    <Profile
+      type="Meu"
+      name={myProfile.name}
+      email={myProfile.email}
+      avatar={myProfile.avatar}
+    />
   )
 }
 

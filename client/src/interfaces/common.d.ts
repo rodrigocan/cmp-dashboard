@@ -9,6 +9,13 @@ export interface CustomButtonProps {
   handleClick?: () => void
 }
 
+export interface ProfileProps {
+  type: string
+  name: string
+  avatar: string
+  email: string
+}
+
 export interface PropertyProps {
   _id: string
   name: string
