@@ -1,13 +1,16 @@
+/* eslint-disable no-restricted-globals */
 import { Typography, Box, Stack } from "@pankod/refine-mui"
-import { useShow } from "@pankod/refine-core"
-import { useNavigate } from "@pankod/refine-react-router-v6"
-import { Place, Edit } from "@mui/icons-material"
+import { useShow, useDelete } from "@pankod/refine-core"
+import { useNavigate, useParams } from "@pankod/refine-react-router-v6"
+import { Place, Edit, Delete } from "@mui/icons-material"
 
 import { CustomButton } from "components"
 
 const PropertyDetails = () => {
   const navigate = useNavigate()
   const { queryResult } = useShow()
+  const { mutate } = useDelete()
+  const { id } = useParams()
 
   const { data, isLoading, isError } = queryResult
 
@@ -19,6 +22,26 @@ const PropertyDetails = () => {
 
   if (isError) {
     return <div>Erro</div>
+  }
+
+  const handleDeleteProperty = () => {
+    const response = confirm(
+      "Tem certeza que deseja excluir este imóvel?"
+    )
+
+    if (response) {
+      mutate(
+        {
+          resource: "properties",
+          id: id as string
+        },
+        {
+          onSuccess: () => {
+            navigate("/properties")
+          }
+        }
+      )
+    }
   }
 
   return (
@@ -41,13 +64,28 @@ const PropertyDetails = () => {
           Imóvel
         </Typography>
 
-        <CustomButton
-          title="Editar"
-          backgroundColor="#475BE8"
-          color="#FCFCFC"
-          icon={<Edit />}
-          handleClick={() => navigate(`/properties/edit/${propertyDetails._id}`)}
-        />
+        <Stack
+          direction="row"
+          gap={2}
+        >
+          <CustomButton
+            title="Editar"
+            backgroundColor="#475BE8"
+            color="#FCFCFC"
+            icon={<Edit />}
+            handleClick={() => navigate(`/properties/edit/${propertyDetails._id}`)}
+          />
+
+          <CustomButton
+            title="Excluir"
+            backgroundColor="#d42e2e"
+            color="#FCFCFC"
+            icon={<Delete />}
+            handleClick={() => {
+              handleDeleteProperty()
+            }}
+          />
+        </Stack>
       </Stack>
 
       <Box
