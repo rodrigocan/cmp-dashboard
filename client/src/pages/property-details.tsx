@@ -1,8 +1,12 @@
 import { Typography, Box, Stack } from "@pankod/refine-mui"
 import { useShow } from "@pankod/refine-core"
-import { Place } from "@mui/icons-material"
+import { useNavigate } from "@pankod/refine-react-router-v6"
+import { Place, Edit } from "@mui/icons-material"
+
+import { CustomButton } from "components"
 
 const PropertyDetails = () => {
+  const navigate = useNavigate()
   const { queryResult } = useShow()
 
   const { data, isLoading, isError } = queryResult
@@ -24,13 +28,27 @@ const PropertyDetails = () => {
       bgcolor="#FCFCFC"
       width="fit-content"
     >
-      <Typography
-        fontSize={24}
-        fontWeight={700}
-        color="#11142D"
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
       >
-        Imóvel
-      </Typography>
+        <Typography
+          fontSize={24}
+          fontWeight={700}
+          color="#11142D"
+        >
+          Imóvel
+        </Typography>
+
+        <CustomButton
+          title="Editar"
+          backgroundColor="#475BE8"
+          color="#FCFCFC"
+          icon={<Edit />}
+          handleClick={() => navigate(`/properties/edit/${propertyDetails._id}`)}
+        />
+      </Stack>
 
       <Box
         mt="20px"
