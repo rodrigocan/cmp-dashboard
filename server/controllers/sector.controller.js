@@ -42,6 +42,20 @@ const getAllSectors = async (req, res) => {
   }
 }
 
+const getSectorDetails = async (req, res) => {
+  const { id } = req.params
+  const sectorExists = await Sector.findOne({ _id: id }).populate([
+    "created_by",
+    "locationProperty"
+  ])
+
+  if (sectorExists) {
+    res.status(200).json(sectorExists)
+  } else {
+    res.status(404).json({ message: "Sector not found" })
+  }
+}
+
 const createSector = async (req, res) => {
   try {
     const { name, phone, email, contactEmail, locationProperty } = req.body
@@ -74,4 +88,8 @@ const createSector = async (req, res) => {
   }
 }
 
-export { getAllSectors, createSector }
+export {
+  getAllSectors,
+  getSectorDetails,
+  createSector
+}
