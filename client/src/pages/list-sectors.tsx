@@ -15,7 +15,7 @@ import {
   TableRow,
   Paper
 } from "@pankod/refine-mui"
-import { useNavigate } from "@pankod/refine-react-router-v6"
+import { useNavigate, Link } from "@pankod/refine-react-router-v6"
 import { useMemo } from "react"
 
 import { CustomButton } from "components"
@@ -161,10 +161,22 @@ const ListSectors = () => {
                 key={sector._id}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
-                <TableCell>{sector.name}</TableCell>
+                <TableCell sx={{ textDecoration: "underline" }}>
+                  <Link
+                    to={`/sectors/show/${sector._id}`}
+                  >
+                    {sector.name}
+                  </Link>
+                </TableCell>
                 <TableCell align="right">{sector.phone}</TableCell>
                 <TableCell align="right">{sector.contactEmail}</TableCell>
-                <TableCell align="right">{sector.locationProperty.name}</TableCell>
+                <TableCell align="right" sx={{ textDecoration: "underline" }}>
+                  <Link
+                    to={`/properties/show/${sector.locationProperty._id}`}
+                  >
+                    {sector.locationProperty.name}
+                  </Link>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
