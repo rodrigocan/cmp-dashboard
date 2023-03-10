@@ -31,6 +31,7 @@ const getAllSectors = async (req, res) => {
       .limit(_end)
       .skip(_start)
       .sort({ [_sort]: _order })
+      .populate("locationProperty")
 
     res.header("x-total-count", count)
     res.header("Access-Control-Expose-Headers", "x-total-count")

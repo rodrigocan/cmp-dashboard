@@ -145,12 +145,31 @@ const ListSectors = () => {
           icon={<Add />}
         />
       </Stack>
-      <pre>{JSON.stringify(allSectors, undefined, 2)}</pre>
-      {/* <TableContainer component={Paper}>
+      <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead></TableHead>
+          <TableHead>
+            <TableRow>
+              <TableCell>Nome</TableCell>
+              <TableCell align="right">Telefone</TableCell>
+              <TableCell align="right">E-mail</TableCell>
+              <TableCell align="right">Imóvel</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {allSectors.map((sector) => (
+              <TableRow
+                key={sector._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell>{sector.name}</TableCell>
+                <TableCell align="right">{sector.phone}</TableCell>
+                <TableCell align="right">{sector.contactEmail}</TableCell>
+                <TableCell align="right">{sector.locationProperty.name}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
         </Table>
-      </TableContainer> */}
+      </TableContainer>
     </Box>
   )
 }
