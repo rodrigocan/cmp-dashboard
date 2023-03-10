@@ -5,6 +5,7 @@ import cors from 'cors'
 import connectDB from "./mongodb/connect.js"
 import userRouter from "./routes/user.routes.js"
 import propertyRouter from "./routes/property.routes.js"
+import sectorRouter from "./routes/sector.routes.js"
 
 dotenv.config()
 
@@ -14,6 +15,7 @@ app.use(express.json({ limit: "50mb" }))
 
 app.use("/api/v1/users", userRouter)
 app.use("/api/v1/properties", propertyRouter)
+app.use("/api/v1/sectors", sectorRouter)
 
 const startServer = async () => {
   try {
