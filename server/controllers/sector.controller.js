@@ -108,4 +108,27 @@ const updateSector = async (req, res) => {
   }
 }
 
-export { getAllSectors, getSectorDetails, createSector, updateSector }
+const deleteSector = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const session = await mongoose.startSession()
+    session.startTransaction()
+
+    await Sector.findByIdAndDelete(id)
+
+    await session.commitTransaction()
+
+    res.status(200).json({ message: "Sector deleted successfully" })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+export {
+  getAllSectors,
+  getSectorDetails,
+  createSector,
+  updateSector,
+  deleteSector
+}
