@@ -88,8 +88,24 @@ const createSector = async (req, res) => {
   }
 }
 
-export {
-  getAllSectors,
-  getSectorDetails,
-  createSector
+const updateSector = async (req, res) => {
+  try {
+    const { id } = req.params
+    const { name, phone, contactEmail } = req.body
+
+    await Sector.findByIdAndUpdate(
+      { _id: id },
+      {
+        name,
+        phone,
+        contactEmail
+      }
+    )
+
+    res.status(200).json({ message: "Sector updated successfully" })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
 }
+
+export { getAllSectors, getSectorDetails, createSector, updateSector }
