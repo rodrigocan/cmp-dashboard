@@ -14,6 +14,7 @@ import MyProfile from "./my-profile";
 import CreateTicket from "./create-ticket";
 import ListTickets from "./list-tickets";
 import TicketDetails from "./ticket-details";
+import ListServices from "./list-services";
 
 export {
   Login,
@@ -31,5 +32,6 @@ export {
   MyProfile,
   CreateTicket,
   ListTickets,
-  TicketDetails
+  TicketDetails,
+  ListServices
 }

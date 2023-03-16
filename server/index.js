@@ -7,6 +7,7 @@ import userRouter from "./routes/user.routes.js"
 import propertyRouter from "./routes/property.routes.js"
 import sectorRouter from "./routes/sector.routes.js"
 import ticketRouter from "./routes/ticket.routes.js"
+import serviceRouter from "./routes/service.routes.js"
 
 dotenv.config()
 
@@ -18,6 +19,7 @@ app.use("/api/v1/users", userRouter)
 app.use("/api/v1/properties", propertyRouter)
 app.use("/api/v1/sectors", sectorRouter)
 app.use("/api/v1/tickets", ticketRouter)
+app.use("/api/v1/services", serviceRouter)
 
 const startServer = async () => {
   try {

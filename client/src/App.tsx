@@ -17,7 +17,8 @@ import {
   SensorDoorOutlined,
   Groups2Outlined,
   DescriptionOutlined,
-  AccountCircleOutlined
+  AccountCircleOutlined,
+  SummarizeOutlined
 } from '@mui/icons-material'
 
 import dataProvider from "@pankod/refine-simple-rest";
@@ -44,7 +45,8 @@ import {
   MyProfile,
   CreateTicket,
   ListTickets,
-  TicketDetails
+  TicketDetails,
+  ListServices
 } from "./pages";
 
 const axiosInstance = axios.create();
@@ -200,6 +202,14 @@ function App() {
               show: TicketDetails,
               icon: <DescriptionOutlined />
             },
+            {
+              name: "services",
+              options: {
+                label: 'Catálogo'
+              },
+              list: ListServices,
+              icon: <SummarizeOutlined />
+            }
           ]}
           Title={Title}
           Sider={Sider}
