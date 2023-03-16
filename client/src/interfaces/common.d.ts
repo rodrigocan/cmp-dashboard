@@ -30,14 +30,12 @@ export interface FormProps {
   register: any
   onFinish: (
     values: FieldValues
-  ) => Promise<
-    void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>
-  >
+  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
   handleImageChange: (file) => void
   onFinishHandler: (data: FieldValues) => Promise<void> | void
-  propertyImage: { name: string, url: string }
+  propertyImage: { name: string; url: string }
 }
 
 export interface SectorFormProps {
@@ -45,10 +43,21 @@ export interface SectorFormProps {
   register: any
   onFinish: (
     values: FieldValues
-  ) => Promise<
-    void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>
-  >
+  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
   onFinishHandler: (data: FieldValues) => Promise<void> | void
+}
+
+export interface TicketFormProps {
+  type: string
+  register: any
+  onFinish: (
+    values: FieldValues
+  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
+  formLoading: boolean
+  handleSubmit: FormEventHandler<HTMLFormElement> | undefined
+  handleImageChange: (file) => void
+  onFinishHandler: (data: FieldValues) => Promise<void> | void
+  ticketImage: { name: string; url: string }
 }
