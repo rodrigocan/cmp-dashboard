@@ -12,6 +12,48 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET
 })
 
+const getAllTickets = async (req, res) => {
+  const {
+    _end,
+    _order,
+    _start,
+    _sort,
+    property_like = "",
+    sector_like = "",
+    service_like = ""
+  } = req.query
+
+  const query = {}
+
+  if (property_like) {
+    query.property = { $regex: property_like, $options: "i" }
+  }
+
+  if (sector_like) {
+    query.sector = { $regex: sector_like, $options: "i" }
+  }
+
+  if (service_like) {
+    query.service = { $regex: service_like, $options: "i" }
+  }
+
+  try {
+    const count = await Ticket.countDocuments({ query })
+
+    const tickets = await Ticket.find(query)
+      .limit(_end)
+      .skip(_start)
+      .sort({ [_sort]: _order })
+
+    res.header("x-total-count", count)
+    res.header("Access-Control-Expose-Headers", "x-total-count")
+
+    res.status(200).json(tickets)
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 const createTicket = async (req, res) => {
   try {
     const {
@@ -55,4 +97,4 @@ const createTicket = async (req, res) => {
   }
 }
 
-export { createTicket }
+export { getAllTickets, createTicket }

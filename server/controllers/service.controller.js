@@ -9,18 +9,18 @@ const getAllServices = async (req, res) => {
     _start,
     _sort,
     name_like = "",
-    theme = "",
-    subject = ""
+    theme_like = "",
+    subject_like = ""
   } = req.query
 
   const query = {}
 
-  if (theme !== "") {
-    query.theme = theme
+  if (theme_like) {
+    query.theme = { $regex: theme_like, $options: "i" }
   }
 
-  if (subject !== "") {
-    query.subject = subject
+  if (subject_like) {
+    query.subject = { $regex: subject_like, $options: "i" }
   }
 
   if (name_like) {

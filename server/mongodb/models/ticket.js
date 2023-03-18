@@ -18,6 +18,8 @@ const TicketSchema = new mongoose.Schema({
     default: "Em aberto",
     required: true
   }
+}, {
+  timestamps: true
 })
 
 const ticketModel = mongoose.model("Ticket", TicketSchema)

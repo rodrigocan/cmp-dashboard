@@ -8,6 +8,9 @@ const PropertySchema = new mongoose.Schema({
   photo: { type: String, required: true },
   allSectors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sector" }],
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+},
+{
+  timestamps: true
 })
 
 const propertyModel = mongoose.model("Property", PropertySchema)

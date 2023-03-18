@@ -6,6 +6,8 @@ const SectorSchema = new mongoose.Schema({
   contactEmail: { type: String, required: true },
   locationProperty: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
   created_by: { type: mongoose.Schema.Types.ObjectId, ref: "User" }
+}, {
+  timestamps: true
 })
 
 const sectorModel = mongoose.model("Sector", SectorSchema)
