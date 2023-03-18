@@ -19,8 +19,7 @@ const getAllTickets = async (req, res) => {
     _start,
     _sort,
     property_like = "",
-    sector_like = "",
-    service_like = ""
+    sector_like = ""
   } = req.query
 
   const query = {}
@@ -31,10 +30,6 @@ const getAllTickets = async (req, res) => {
 
   if (sector_like) {
     query.sector = { $regex: sector_like, $options: "i" }
-  }
-
-  if (service_like) {
-    query.service = { $regex: service_like, $options: "i" }
   }
 
   try {

@@ -1,5 +1,8 @@
 import {
   useDataGrid,
+  EditButton,
+  ShowButton,
+  DeleteButton,
   List,
   DataGrid,
   GridColumns
@@ -21,10 +24,23 @@ const columns: GridColumns = [
 
     return valueFormatted
   }},
-  { field: "property", headerName: "Imóvel", width: 200 },
-  { field: "sector", headerName: "Setor", width: 200 },
-  { field: "service", headerName: "Serviço", width: 250 },
-  { field: "status", headerName: "Status", width: 150 }
+  { field: "property", headerName: "Imóvel", width: 220 },
+  { field: "sector", headerName: "Setor", width: 300 },
+  { field: "status", headerName: "Status", width: 120 },
+  {
+    field: "actions",
+    headerName: "Ações",
+    width: 160,
+    renderCell: function render({ row }) {
+      return (
+        <>
+          <ShowButton hideText recordItemId={row._id} />
+          <EditButton hideText recordItemId={row._id} />
+          <DeleteButton hideText recordItemId={row._id} />
+        </>
+      )
+    }
+  }
 ]
 
 const ListTickets = () => {
