@@ -49,6 +49,17 @@ const getAllTickets = async (req, res) => {
   }
 }
 
+const getTicketDetails = async (req, res) => {
+  const { id } = req.params
+  const ticketExists = await Ticket.findOne({ _id: id })
+
+  if (ticketExists) {
+    res.status(200).json(ticketExists)
+  } else {
+    res.status(404).json({ message: "Ticket not found" })
+  }
+}
+
 const createTicket = async (req, res) => {
   try {
     const {
@@ -111,6 +122,7 @@ const deleteTicket = async (req, res) => {
 
 export {
   getAllTickets,
+  getTicketDetails,
   createTicket,
   deleteTicket
 }
