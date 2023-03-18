@@ -92,4 +92,25 @@ const createTicket = async (req, res) => {
   }
 }
 
-export { getAllTickets, createTicket }
+const deleteTicket = async (req, res) => {
+  try {
+    const { id } = req.params
+
+    const session = await mongoose.startSession()
+    session.startTransaction()
+
+    await Ticket.findByIdAndDelete(id)
+
+    await session.commitTransaction()
+
+    res.status(200).json({ message: "Ticket deleted successfully" })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
+export {
+  getAllTickets,
+  createTicket,
+  deleteTicket
+}
