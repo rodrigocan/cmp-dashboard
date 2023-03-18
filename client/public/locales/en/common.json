@@ -60,32 +60,33 @@
     },
     "error": {
       "info": "You may have forgotten to add the {{action}} component to {{resource}} resource.",
-      "404": "Sorry, the page you visited does not exist.",
+      "404": "Desculpa, a página que você visitou não existe.",
       "resource404": "Are you sure you have created the {{resource}} resource.",
-      "backHome": "Back Home"
+      "backHome": "Voltar para Home"
     }
   },
   "actions": {
-    "list": "List",
-    "create": "Create",
-    "edit": "Edit",
-    "show": "Show"
+    "list": "Listar",
+    "create": "Criar",
+    "edit": "Editar",
+    "show": "Mostrar"
   },
   "buttons": {
     "create": "Create",
     "save": "Save",
     "logout": "Sair",
-    "delete": "Delete",
-    "edit": "Edit",
-    "cancel": "Cancel",
-    "confirm": "Are you sure?",
-    "filter": "Filter",
-    "clear": "Clear",
+    "delete": "Apagar",
+    "edit": "Editar",
+    "cancel": "Cancelar",
+    "confirm": "Você tem certeza?",
+    "filter": "Filtrar",
+    "clear": "Limpar",
     "refresh": "Refresh",
-    "show": "Show",
-    "undo": "Undo",
-    "import": "Import",
-    "clone": "Clone",
+    "show": "Mostrar",
+    "undo": "Desfazer",
+    "import": "Importar",
+    "export": "Exportar",
+    "clone": "Clonar",
     "notAccessTitle": "You don't have permission to access"
   },
   "warnWhenUnsavedChanges": "Are you sure you want to leave? You have unsaved changes.",
@@ -101,7 +102,7 @@
     "editError": "Error when editing {{resource}} (status code: {{statusCode}})",
     "importProgress": "Importing: {{processed}}/{{total}}"
   },
-  "loading": "Loading",
+  "loading": "Carregando",
   "tags": {
     "clone": "Clone"
   },
@@ -136,6 +137,6 @@
     }
   },
   "table": {
-    "actions": "Actions"
+    "actions": "Ações"
   }
 }

@@ -8,6 +8,8 @@ const CreateTicket = () => {
   const {
     refineCore: { onFinish, formLoading },
     register,
+    watch,
+    setValue,
     handleSubmit
   } = useForm()
 
@@ -29,12 +31,15 @@ const CreateTicket = () => {
       ...data,
       photo: ticketImage.url ? ticketImage.url : ""
     })
+
   }
 
   return (
     <CreateTicketForm
       type="Abertura"
       register={register}
+      watch={watch}
+      setValue={setValue}
       onFinish={onFinish}
       formLoading={formLoading}
       handleSubmit={handleSubmit}

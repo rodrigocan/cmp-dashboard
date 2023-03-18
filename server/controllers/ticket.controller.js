@@ -21,6 +21,8 @@ const createTicket = async (req, res) => {
       requester,
       contact_phone,
       contact_email,
+      subject,
+      theme,
       service,
       description,
       photo
@@ -38,6 +40,8 @@ const createTicket = async (req, res) => {
       requester,
       contact_phone,
       contact_email,
+      subject,
+      theme,
       service,
       description,
       photo: photoUrl.url

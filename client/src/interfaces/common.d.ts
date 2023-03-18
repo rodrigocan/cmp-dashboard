@@ -52,6 +52,8 @@ export interface SectorFormProps {
 export interface TicketFormProps {
   type: string
   register: any
+  watch: any
+  setValue: any
   onFinish: (
     values: FieldValues
   ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>

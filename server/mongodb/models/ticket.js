@@ -2,11 +2,13 @@ import mongoose from "mongoose"
 
 const TicketSchema = new mongoose.Schema({
   city: { type: String, required: true },
-  property: { type: mongoose.Schema.Types.ObjectId, ref: "Property" },
-  sector: { type: mongoose.Schema.Types.ObjectId, ref: "Sector" },
+  property: { type: String, required: true },
+  sector: { type: String, required: true },
   requester: { type: String, required: true },
   contact_phone: { type: String, required: true },
   contact_email: { type: String, required: true },
+  subject: { type: String, required: true },
+  theme: { type: String, required: true },
   service: { type: String, required: true },
   description: { type: String, required: true },
   photo: { type: String, required: false },
