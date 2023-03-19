@@ -3,6 +3,7 @@ import {
   Show,
   TextFieldComponent as TextField,
   Typography,
+  Box,
   Stack
 } from "@pankod/refine-mui"
 
@@ -59,6 +60,56 @@ const TicketDetails = () => {
           Descrição:
         </Typography>
         <TextField value={ticket?.description ?? ""} />
+
+        {ticket?.photo && (
+          <>
+            <Typography variant="body1" fontWeight="bold">
+              Foto anexada na abertura:
+            </Typography>
+            <Box
+              component="img"
+              sx={{
+                width: 400
+              }}
+              src={ticket?.photo}
+            />
+          </>
+        )}
+
+        <Typography variant="body1" fontWeight="bold">
+          Status:
+        </Typography>
+        <TextField value={ticket?.status ?? ""} />
+
+        <Typography variant="body1" fontWeight="bold">
+          Aberto em:
+        </Typography>
+        <TextField
+          value={
+            new Date(ticket?.createdAt).toLocaleString("pt-BR", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
+            })
+          }
+        />
+
+        <Typography variant="body1" fontWeight="bold">
+          Atualizado em:
+        </Typography>
+        <TextField
+          value={
+            new Date(ticket?.updatedAt).toLocaleString("pt-BR", {
+              year: "numeric",
+              month: "numeric",
+              day: "numeric",
+              hour: "2-digit",
+              minute: "2-digit"
+            })
+          }
+        />
       </Stack>
     </Show>
   )
