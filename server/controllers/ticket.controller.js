@@ -144,6 +144,10 @@ const updateTicketProgressInfo = async (req, res) => {
       info
     })
 
+    if (ticket.status === "Em aberto") {
+      ticket.status = "Em andamento"
+    }
+
     await ticket.save()
 
     res.status(200).json({ message: "Ticket updated successfully" })
