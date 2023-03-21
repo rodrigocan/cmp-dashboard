@@ -81,7 +81,7 @@ const createTicket = async (req, res) => {
 
     const photoUrl = await cloudinary.uploader.upload(photo)
 
-    await Ticket.create({
+    const newTicket = await Ticket.create({
       city,
       property,
       sector,
@@ -94,6 +94,14 @@ const createTicket = async (req, res) => {
       description,
       photo: photoUrl.url
     })
+
+    newTicket.progress_info.push({
+      date_time: new Date(),
+      user_email: "admin",
+      info: "Abertura do chamado."
+    })
+
+    await newTicket.save()
 
     await session.commitTransaction()
 
