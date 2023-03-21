@@ -1,17 +1,46 @@
+import { useGetIdentity, HttpError } from "@pankod/refine-core"
+import { useModalForm } from "@pankod/refine-react-hook-form"
 import { useShow } from "@pankod/refine-core"
 import {
   Show,
   TextFieldComponent as TextField,
   Typography,
   Box,
-  Stack
+  Stack,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Button
 } from "@pankod/refine-mui"
+
+import { AddInfoModal } from "components/ticket/AddInfoModal"
+
+import { ProgressInfo } from "components/ticket/AddInfoModal"
 
 const TicketDetails = () => {
   const { queryResult } = useShow()
   const { data, isLoading } = queryResult
 
   const ticket = data?.data
+
+  const { data: user } = useGetIdentity()
+
+  const addInfoModalFormProps = useModalForm<
+    ProgressInfo,
+    HttpError
+  >({
+    refineCoreProps: { action: "edit", redirect: "show" },
+    values: {
+      user_email: user?.email
+    }
+  })
+
+  const {
+    modal: { show: showAddInfoModal }
+  } = addInfoModalFormProps
 
   return (
     <Show isLoading={isLoading}>
@@ -110,6 +139,53 @@ const TicketDetails = () => {
             })
           }
         />
+
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Typography variant="body1" fontWeight="bold">
+            Andamento do chamado:
+          </Typography>
+
+          <Button
+            variant="contained"
+            onClick={() => showAddInfoModal(ticket?._id)}
+          >
+            Adicionar informação
+          </Button>
+
+          <AddInfoModal {...addInfoModalFormProps} />
+        </Stack>
+        <TableContainer>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell>Data/hora</TableCell>
+                <TableCell>Usuário</TableCell>
+                <TableCell>Informação</TableCell>
+                <TableCell>Anexo</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {ticket?.progress_info?.sort(
+                (a: ProgressInfo, b: ProgressInfo) => new Date(b.date_time).getTime() - new Date(a.date_time).getTime()
+              ).map((progress_info: ProgressInfo) => (
+                <TableRow key={progress_info._id}>
+                  <TableCell>
+                  {new Date(progress_info.date_time).toLocaleString("pt-BR", {
+                    year: "numeric",
+                    month: "numeric",
+                    day: "numeric",
+                    hour: "2-digit",
+                    minute: "2-digit"
+                  })}
+                  </TableCell>
+                  <TableCell>{progress_info.user_email}</TableCell>
+                  <TableCell>{progress_info.info}</TableCell>
+                  <TableCell>-</TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </Stack>
     </Show>
   )

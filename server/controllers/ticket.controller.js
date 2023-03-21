@@ -120,9 +120,34 @@ const deleteTicket = async (req, res) => {
   }
 }
 
+const updateTicketProgressInfo = async (req, res) => {
+  const { id } = req.params
+  const { info, user_email } = req.body
+
+  try {
+    const ticket = await Ticket.findById(id)
+    if (!ticket) {
+      res.status(404).json({ message: "Ticket not found" })
+    }
+
+    ticket.progress_info.push({
+      date_time: new Date(),
+      user_email,
+      info
+    })
+
+    await ticket.save()
+
+    res.status(200).json({ message: "Ticket updated successfully" })
+  } catch (error) {
+    res.status(500).json({ message: error.message })
+  }
+}
+
 export {
   getAllTickets,
   getTicketDetails,
   createTicket,
-  deleteTicket
+  deleteTicket,
+  updateTicketProgressInfo
 }

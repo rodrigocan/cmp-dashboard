@@ -63,3 +63,13 @@ export interface TicketFormProps {
   onFinishHandler: (data: FieldValues) => Promise<void> | void
   ticketImage: { name: string; url: string }
 }
+
+export interface FormDialogProps {
+  register: any
+  onFinish: (
+    values: FieldValues
+  ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
+  formLoading: boolean
+  handleSubmit: FormEventHandler<HTMLFormElement> | undefined
+  onFinishHandler: (data: FieldValues) => Promise<void> | void
+}
