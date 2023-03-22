@@ -18,7 +18,7 @@ export const DonutChart = ({ title, value, series, colors }: DonutChartProps) =>
       flexDirection="row"
       justifyContent="space-between"
       alignItems="center"
-      pl={3.5}
+      px={3.5}
       py={2}
       gap={2}
       borderRadius="15px"
@@ -44,7 +44,8 @@ export const DonutChart = ({ title, value, series, colors }: DonutChartProps) =>
           chart: { type: "donut" },
           colors,
           legend: { show: false },
-          dataLabels: { enabled: false }
+          dataLabels: { enabled: false },
+          labels: ["Em aberto", "Em andamento", "Resolvidos"],
         }}
         series={series}
         type="donut"
