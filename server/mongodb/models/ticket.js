@@ -15,7 +15,7 @@ const TicketSchema = new mongoose.Schema(
     photo: { type: String, required: false },
     status: {
       type: String,
-      enum: ["Em aberto", "Em andamento", "Concluído"],
+      enum: ["Em aberto", "Em andamento", "Resolvido"],
       default: "Em aberto",
       required: true
     },
