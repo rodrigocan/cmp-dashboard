@@ -15,10 +15,10 @@ import {
   TableRow,
   Button
 } from "@pankod/refine-mui"
+import { InfoOutlined, TroubleshootOutlined } from "@mui/icons-material"
 
-import { AddInfoModal } from "components/ticket/AddInfoModal"
-
-import { ProgressInfo } from "components/ticket/AddInfoModal"
+import { AddInfoModal, ProgressInfo } from "components/ticket/AddInfoModal"
+import { IssueModal, IssueInfo } from "components/ticket/IssueModal"
 
 const TicketDetails = () => {
   const { queryResult } = useShow()
@@ -34,13 +34,30 @@ const TicketDetails = () => {
   >({
     refineCoreProps: { action: "edit", redirect: "show" },
     values: {
-      user_email: user?.email
+      user_email: user?.email,
+      updateType: "info"
+    }
+  })
+
+  const issueModalFormProps = useModalForm<
+    IssueInfo,
+    HttpError
+  >({
+    refineCoreProps: { action: "edit", redirect: "show" },
+    values: {
+      user_email: user?.email,
+      updateType: "issue"
     }
   })
 
   const {
     modal: { show: showAddInfoModal }
   } = addInfoModalFormProps
+
+  const {
+    modal: { show: showIssueModal },
+    watch
+  } = issueModalFormProps
 
   return (
     <Show isLoading={isLoading}>
@@ -145,14 +162,43 @@ const TicketDetails = () => {
             Andamento do chamado:
           </Typography>
 
-          <Button
-            variant="contained"
-            onClick={() => showAddInfoModal(ticket?._id)}
-          >
-            Adicionar informação
-          </Button>
+          <Stack direction="row" justifyContent="space-between" alignItems="center" gap={1}>
+            <Button
+              variant="contained"
+              onClick={() => showAddInfoModal(ticket?._id)}
+              color="warning"
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap={1}
+              >
+                <InfoOutlined />
+                <Typography fontSize={12}>Adicionar informação</Typography>
+              </Stack>
+            </Button>
 
-          <AddInfoModal {...addInfoModalFormProps} />
+            <AddInfoModal {...addInfoModalFormProps} />
+
+            <Button
+              variant="contained"
+              onClick={() => showIssueModal(ticket?._id)}
+              color="info"
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap={1}
+              >
+                <TroubleshootOutlined />
+                <Typography fontSize={12}>Diagnóstico</Typography>
+              </Stack>
+            </Button>
+
+            <IssueModal {...issueModalFormProps} />
+          </Stack>
         </Stack>
         <TableContainer>
           <Table>
@@ -170,13 +216,13 @@ const TicketDetails = () => {
               ).map((progress_info: ProgressInfo) => (
                 <TableRow key={progress_info._id}>
                   <TableCell>
-                  {new Date(progress_info.date_time).toLocaleString("pt-BR", {
-                    year: "numeric",
-                    month: "numeric",
-                    day: "numeric",
-                    hour: "2-digit",
-                    minute: "2-digit"
-                  })}
+                    {new Date(progress_info.date_time).toLocaleString("pt-BR", {
+                      year: "numeric",
+                      month: "numeric",
+                      day: "numeric",
+                      hour: "2-digit",
+                      minute: "2-digit"
+                    })}
                   </TableCell>
                   <TableCell>{progress_info.user_email}</TableCell>
                   <TableCell>{progress_info.info}</TableCell>

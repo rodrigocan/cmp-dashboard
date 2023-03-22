@@ -23,7 +23,12 @@ const TicketSchema = new mongoose.Schema(
       {
         date_time: { type: Date, required: true },
         user_email: { type: String, required: true },
-        info: { type: String, required: true }
+        info: { type: String, required: true },
+        updateType: {
+          type: String,
+          enum: ["info", "issue", "solution"],
+          required: true
+        }
       }
     ]
   },

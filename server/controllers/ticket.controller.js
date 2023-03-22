@@ -98,7 +98,8 @@ const createTicket = async (req, res) => {
     newTicket.progress_info.push({
       date_time: new Date(),
       user_email: "admin",
-      info: "Abertura do chamado."
+      info: "Abertura do chamado.",
+      updateType: "info"
     })
 
     await newTicket.save()
@@ -130,7 +131,7 @@ const deleteTicket = async (req, res) => {
 
 const updateTicketProgressInfo = async (req, res) => {
   const { id } = req.params
-  const { info, user_email } = req.body
+  const { info, issue, user_email, updateType } = req.body
 
   try {
     const ticket = await Ticket.findById(id)
@@ -141,7 +142,8 @@ const updateTicketProgressInfo = async (req, res) => {
     ticket.progress_info.push({
       date_time: new Date(),
       user_email,
-      info
+      info: info ? info : issue,
+      updateType
     })
 
     if (ticket.status === "Em aberto") {
