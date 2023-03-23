@@ -15,10 +15,11 @@ import {
   TableRow,
   Button
 } from "@pankod/refine-mui"
-import { InfoOutlined, TroubleshootOutlined } from "@mui/icons-material"
+import { InfoOutlined, TroubleshootOutlined, AssignmentTurnedInOutlined } from "@mui/icons-material"
 
 import { AddInfoModal, ProgressInfo } from "components/ticket/AddInfoModal"
 import { IssueModal, IssueInfo } from "components/ticket/IssueModal"
+import { SolutionModal, SolutionInfo } from "components/ticket/SolutionModal"
 
 const TicketDetails = () => {
   const { queryResult } = useShow()
@@ -50,6 +51,17 @@ const TicketDetails = () => {
     }
   })
 
+  const solutionModalFormProps = useModalForm<
+    SolutionInfo,
+    HttpError
+  >({
+    refineCoreProps: { action: "edit", redirect: "show" },
+    values: {
+      user_email: user?.email,
+      updateType: "solution"
+    }
+  })
+
   const {
     modal: { show: showAddInfoModal }
   } = addInfoModalFormProps
@@ -58,9 +70,15 @@ const TicketDetails = () => {
     modal: { show: showIssueModal }
   } = issueModalFormProps
 
-  const hasIssue = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "issue")
+  const {
+    modal: { show: showSolutionModal }
+  } = solutionModalFormProps
 
-  const issue = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "issue").info
+  const hasIssue = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "issue")
+  const issue = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "issue")?.info
+
+  const hasSolution = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "solution")
+  const solution = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "solution")?.info
 
   return (
     <Show isLoading={isLoading}>
@@ -141,6 +159,17 @@ const TicketDetails = () => {
           </>
         )}
 
+        {hasSolution && (
+          <>
+            <Typography variant="body1" fontWeight="bold">
+              Solução:
+            </Typography>
+            <TextField
+              value={solution ?? ""}
+            />
+          </>
+        )}
+
         <Typography variant="body1" fontWeight="bold">
           Aberto em:
         </Typography>
@@ -181,6 +210,7 @@ const TicketDetails = () => {
               variant="contained"
               onClick={() => showAddInfoModal(ticket?._id)}
               color="warning"
+              disabled={hasSolution}
             >
               <Stack
                 direction="row"
@@ -213,6 +243,25 @@ const TicketDetails = () => {
             </Button>
 
             <IssueModal {...issueModalFormProps} />
+
+            <Button
+              variant="contained"
+              onClick={() => showSolutionModal(ticket?._id)}
+              color="success"
+              disabled={!hasIssue || hasSolution}
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+                gap={1}
+              >
+                <AssignmentTurnedInOutlined />
+                <Typography fontSize={12}>Resolver</Typography>
+              </Stack>
+            </Button>
+
+            <SolutionModal {...solutionModalFormProps} />
           </Stack>
         </Stack>
         <TableContainer>
@@ -244,6 +293,8 @@ const TicketDetails = () => {
                     {
                       progress_info.updateType === "issue"
                         ? `Diagnóstico: ${progress_info.info}`
+                        : progress_info.updateType === "solution"
+                        ? `Solução: ${progress_info.info}`
                         : progress_info.info
                     }
                   </TableCell>

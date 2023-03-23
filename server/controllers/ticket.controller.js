@@ -131,7 +131,7 @@ const deleteTicket = async (req, res) => {
 
 const updateTicketProgressInfo = async (req, res) => {
   const { id } = req.params
-  const { info, issue, user_email, updateType } = req.body
+  const { info, issue, solution, user_email, updateType } = req.body
 
   try {
     const ticket = await Ticket.findById(id)
@@ -142,12 +142,16 @@ const updateTicketProgressInfo = async (req, res) => {
     ticket.progress_info.push({
       date_time: new Date(),
       user_email,
-      info: info ? info : issue,
+      info: info ? info : issue ? issue : solution,
       updateType
     })
 
     if (ticket.status === "Em aberto") {
       ticket.status = "Em andamento"
+    }
+
+    if (updateType === "solution") {
+      ticket.status = "Resolvido"
     }
 
     await ticket.save()
