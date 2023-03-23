@@ -18,6 +18,7 @@ export interface ProgressInfo {
   date_time: Date
   user_email: string
   info: string
+  updateType: "info" | "issue" | "solution"
 }
 
 export const AddInfoModal: React.FC<

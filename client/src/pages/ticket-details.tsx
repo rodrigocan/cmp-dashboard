@@ -55,9 +55,10 @@ const TicketDetails = () => {
   } = addInfoModalFormProps
 
   const {
-    modal: { show: showIssueModal },
-    watch
+    modal: { show: showIssueModal }
   } = issueModalFormProps
+
+  const hasIssue = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "issue")
 
   return (
     <Show isLoading={isLoading}>
@@ -185,6 +186,7 @@ const TicketDetails = () => {
               variant="contained"
               onClick={() => showIssueModal(ticket?._id)}
               color="info"
+              disabled={hasIssue}
             >
               <Stack
                 direction="row"
