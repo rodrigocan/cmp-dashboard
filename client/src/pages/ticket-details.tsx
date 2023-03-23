@@ -60,6 +60,8 @@ const TicketDetails = () => {
 
   const hasIssue = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "issue")
 
+  const issue = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "issue").info
+
   return (
     <Show isLoading={isLoading}>
       <Stack gap={1}>
@@ -127,6 +129,17 @@ const TicketDetails = () => {
           Status:
         </Typography>
         <TextField value={ticket?.status ?? ""} />
+
+        {hasIssue && (
+          <>
+            <Typography variant="body1" fontWeight="bold">
+              Diagnóstico:
+            </Typography>
+            <TextField
+              value={issue ?? ""}
+            />
+          </>
+        )}
 
         <Typography variant="body1" fontWeight="bold">
           Aberto em:
@@ -227,7 +240,13 @@ const TicketDetails = () => {
                     })}
                   </TableCell>
                   <TableCell>{progress_info.user_email}</TableCell>
-                  <TableCell>{progress_info.info}</TableCell>
+                  <TableCell>
+                    {
+                      progress_info.updateType === "issue"
+                        ? `Diagnóstico: ${progress_info.info}`
+                        : progress_info.info
+                    }
+                  </TableCell>
                   <TableCell>-</TableCell>
                 </TableRow>
               ))}
