@@ -1,4 +1,4 @@
-import { HttpError, useList } from "@pankod/refine-core"
+import { HttpError, useList, useCustom } from "@pankod/refine-core"
 import {
   Box,
   Stack,
@@ -83,8 +83,9 @@ const CreateTicketForm = ({
   const sectors = sectorsData?.data ?? []
   const filteredSectors = sectors.filter((sector) => sector.locationProperty.name === watch("property"))
 
-  const { data: servicesData } = useList<IService, HttpError>({
-    resource: "services"
+  const { data: servicesData } = useCustom<IService[], HttpError>({
+    url: "http://localhost:8080/api/v1/services",
+    method: "get"
   })
 
   const servicesObjects = servicesData?.data ?? []
