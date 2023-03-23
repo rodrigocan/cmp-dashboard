@@ -79,7 +79,9 @@ const createTicket = async (req, res) => {
     const session = await mongoose.startSession()
     session.startTransaction()
 
-    const photoUrl = await cloudinary.uploader.upload(photo)
+    const photoUrl = req.body.photo ? await cloudinary.uploader.upload(photo) : null
+
+    const hasPhoto = !!photoUrl
 
     const newTicket = await Ticket.create({
       city,
@@ -92,7 +94,7 @@ const createTicket = async (req, res) => {
       theme,
       service,
       description,
-      photo: photoUrl.url
+      photo: hasPhoto ? photoUrl.url : ""
     })
 
     newTicket.progress_info.push({
