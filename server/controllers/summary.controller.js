@@ -8,7 +8,7 @@ export const getSummary = async (req, res) => {
 
     const inProgressTickets = await Ticket.countDocuments({ status: "Em andamento" })
 
-    const closedTickets = await Ticket.countDocuments({ status: "Resolvido" })
+    const resolvedTickets = await Ticket.countDocuments({ status: "Resolvido" })
 
     const pipeline = [
       {
@@ -52,7 +52,7 @@ export const getSummary = async (req, res) => {
       totalTickets,
       openTickets,
       inProgressTickets,
-      closedTickets,
+      resolvedTickets,
       ticketsBySubject
     })
   } catch (error) {

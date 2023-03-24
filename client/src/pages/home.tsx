@@ -7,6 +7,14 @@ import {
 
 import { DonutChart } from "components/charts/DonutChart"
 
+interface Subject {
+  _id: string
+  totalTickets: number
+  openTickets: number
+  inProgressTickets: number
+  resolvedTickets: number
+}
+
 const Home = () => {
   const { data, isLoading, isError } = useCustom({
     url: "http://localhost:8080/api/v1/summary",
@@ -28,9 +36,19 @@ const Home = () => {
         <DonutChart
           title="Total de chamados"
           value={summary.totalTickets}
-          series={[summary.openTickets, summary.inProgressTickets, summary.closedTickets]}
+          series={[summary.openTickets, summary.inProgressTickets, summary.resolvedTickets]}
           colors={["#FF5722", "#FFC107", "#22FF00"]}
         />
+
+        {summary.ticketsBySubject?.map((subject: Subject) => (
+          <DonutChart
+            key={subject._id}
+            title={subject._id}
+            value={subject.totalTickets}
+            series={[subject.openTickets, subject.inProgressTickets, subject.resolvedTickets]}
+            colors={["#FF5722", "#FFC107", "#22FF00"]}
+          />
+        ))}
       </Box>
     </Box>
   )
