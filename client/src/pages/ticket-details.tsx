@@ -13,7 +13,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Button
+  Button,
+  Chip
 } from "@pankod/refine-mui"
 import { InfoOutlined, TroubleshootOutlined, AssignmentTurnedInOutlined } from "@mui/icons-material"
 
@@ -83,10 +84,21 @@ const TicketDetails = () => {
   return (
     <Show isLoading={isLoading}>
       <Stack gap={1}>
-        <Typography variant="body1" fontWeight="bold">
-          ID:
-        </Typography>
-        <TextField value={ticket?._id ?? ""} />
+        <Stack direction="row" justifyContent="space-between" alignItems="center">
+          <Stack gap={1} direction="row" alignItems="center">
+            <Typography variant="body1" fontWeight="bold">
+              ID:
+            </Typography>
+            <TextField value={ticket?._id ?? ""} />
+          </Stack>
+          <Chip
+            sx={{ fontSize: 18, fontWeight: 700 }}
+            label={ticket?.status}
+            color={ticket?.status === "Em aberto" ? "error"
+              : ticket?.status === "Em andamento" ? "warning"
+              : "success"}
+          />
+        </Stack>
 
         <Typography variant="body1" fontWeight="bold">
           Cidade:
@@ -142,11 +154,6 @@ const TicketDetails = () => {
             />
           </>
         )}
-
-        <Typography variant="body1" fontWeight="bold">
-          Status:
-        </Typography>
-        <TextField value={ticket?.status ?? ""} />
 
         {hasIssue && (
           <>
@@ -294,8 +301,8 @@ const TicketDetails = () => {
                       progress_info.updateType === "issue"
                         ? `Diagnóstico: ${progress_info.info}`
                         : progress_info.updateType === "solution"
-                        ? `Solução: ${progress_info.info}`
-                        : progress_info.info
+                          ? `Solução: ${progress_info.info}`
+                          : progress_info.info
                     }
                   </TableCell>
                   <TableCell>-</TableCell>
