@@ -26,7 +26,7 @@ const Home = () => {
 
       <Box mt="20px" display="flex" flexWrap="wrap" gap={4}>
         <DonutChart
-          title="Sumário de chamados"
+          title="Total de chamados"
           value={summary.totalTickets}
           series={[summary.openTickets, summary.inProgressTickets, summary.closedTickets]}
           colors={["#FF5722", "#FFC107", "#22FF00"]}

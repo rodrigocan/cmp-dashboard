@@ -10,11 +10,50 @@ export const getSummary = async (req, res) => {
 
     const closedTickets = await Ticket.countDocuments({ status: "Resolvido" })
 
+    const pipeline = [
+      {
+        $group: {
+          _id: "$subject",
+          totalTickets: { $sum: 1 },
+          openTickets: {
+            $sum: {
+              $cond: [
+                { $eq: ["$status", "Em aberto"] },
+                1,
+                0
+              ]
+            }
+          },
+          inProgressTickets: {
+            $sum: {
+              $cond: [
+                { $eq: ["$status", "Em andamento"] },
+                1,
+                0
+              ]
+            }
+          },
+          resolvedTickets: {
+            $sum: {
+              $cond: [
+                { $eq: ["$status", "Resolvido"] },
+                1,
+                0
+              ]
+            }
+          }
+        }
+      }
+    ]
+
+    const ticketsBySubject = await Ticket.aggregate(pipeline)
+
     res.status(200).json({
       totalTickets,
       openTickets,
       inProgressTickets,
-      closedTickets
+      closedTickets,
+      ticketsBySubject
     })
   } catch (error) {
     res.status(404).json({ message: error.message })
