@@ -1,9 +1,14 @@
-import { useImport, useExport, useNotification } from "@pankod/refine-core"
+import { useImport, useExport, useNotification } from '@pankod/refine-core'
 
-import { useDataGrid, ImportButton, List, ExportButton } from "@pankod/refine-mui"
-
-import { Stack } from "@pankod/refine-mui"
-import { DataGrid, GridColumns } from "@pankod/refine-mui"
+import {
+  useDataGrid,
+  ImportButton,
+  List,
+  ExportButton,
+  Stack,
+  DataGrid,
+  GridColumns,
+} from '@pankod/refine-mui'
 
 interface IService {
   subject: string
@@ -12,9 +17,9 @@ interface IService {
 }
 
 const columns: GridColumns = [
-  { field: "subject", headerName: "Área", width: 200 },
-  { field: "theme", headerName: "Tema", width: 200 },
-  { field: "name", headerName: "Serviço", flex: 1 }
+  { field: 'subject', headerName: 'Área', width: 200 },
+  { field: 'theme', headerName: 'Tema', width: 200 },
+  { field: 'name', headerName: 'Serviço', flex: 1 },
 ]
 
 const ListServices = () => {
@@ -25,10 +30,10 @@ const ListServices = () => {
   const { inputProps, isLoading } = useImport({
     onFinish: () => {
       open?.({
-        message: "Importação concluída com sucesso",
-        type: "success"
+        message: 'Importação concluída com sucesso',
+        type: 'success',
       })
-    }
+    },
   })
 
   const { triggerExport, isLoading: exportLoading } = useExport<IService>({
@@ -36,10 +41,10 @@ const ListServices = () => {
       return {
         subject: item.subject,
         theme: item.theme,
-        name: item.name
+        name: item.name,
       }
     },
-    maxItemCount: 50
+    maxItemCount: 50,
   })
 
   return (
@@ -47,20 +52,18 @@ const ListServices = () => {
       headerProps={{
         action: (
           <Stack direction="row">
-            <ImportButton
-              loading={isLoading}
-              inputProps={inputProps}
-            />
-            <ExportButton
-              loading={exportLoading}
-              onClick={triggerExport}
-            />
+            <ImportButton loading={isLoading} inputProps={inputProps} />
+            <ExportButton loading={exportLoading} onClick={triggerExport} />
           </Stack>
-        )
+        ),
       }}
     >
-      <div style={{ height: 700, width: "100%" }}>
-        <DataGrid getRowId={(row) => row._id} {...dataGridProps} columns={columns} />
+      <div style={{ height: 700, width: '100%' }}>
+        <DataGrid
+          getRowId={(row) => row._id}
+          {...dataGridProps}
+          columns={columns}
+        />
       </div>
     </List>
   )

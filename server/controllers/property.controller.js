@@ -20,13 +20,13 @@ const getAllProperties = async (req, res) => {
     _start,
     _sort,
     name_like = "",
-    city = ""
+    city_like = ""
   } = req.query
 
   const query = {}
 
-  if (city !== "") {
-    query.city = city
+  if (city_like) {
+    query.city = { $regex: city_like, $options: "i" }
   }
 
   if (name_like) {
@@ -65,14 +65,7 @@ const getPropertyDetail = async (req, res) => {
 
 const createProperty = async (req, res) => {
   try {
-    const {
-      name,
-      city,
-      address,
-      zip_code,
-      email,
-      photo
-    } = req.body
+    const { name, city, address, zip_code, email, photo } = req.body
 
     const session = await mongoose.startSession()
     session.startTransaction()
