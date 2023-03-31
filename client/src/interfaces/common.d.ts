@@ -29,7 +29,7 @@ export interface FormProps {
   type: string
   register: any
   onFinish: (
-    values: FieldValues
+    values: FieldValues,
   ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -42,7 +42,7 @@ export interface SectorFormProps {
   type: string
   register: any
   onFinish: (
-    values: FieldValues
+    values: FieldValues,
   ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -55,7 +55,7 @@ export interface TicketFormProps {
   watch: any
   setValue: any
   onFinish: (
-    values: FieldValues
+    values: FieldValues,
   ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined
@@ -67,7 +67,7 @@ export interface TicketFormProps {
 export interface FormDialogProps {
   register: any
   onFinish: (
-    values: FieldValues
+    values: FieldValues,
   ) => Promise<void | CreateResponse<BaseRecord> | UpdateResponse<BaseRecord>>
   formLoading: boolean
   handleSubmit: FormEventHandler<HTMLFormElement> | undefined

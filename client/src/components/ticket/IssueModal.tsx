@@ -1,17 +1,16 @@
-import { HttpError } from "@pankod/refine-core"
-import { SaveButton } from "@pankod/refine-mui"
-
+import { HttpError } from '@pankod/refine-core'
 import {
+  SaveButton,
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField
-} from "@pankod/refine-mui"
+  TextField,
+} from '@pankod/refine-mui'
 
-import { UseModalFormReturnType } from "@pankod/refine-react-hook-form"
+import { UseModalFormReturnType } from '@pankod/refine-react-hook-form'
 
 export interface IssueInfo {
   _id?: string
@@ -26,7 +25,7 @@ export const IssueModal: React.FC<
   saveButtonProps,
   modal: { visible, close },
   register,
-  formState: { errors }
+  formState: { errors },
 }) => {
   return (
     <Dialog
@@ -39,11 +38,11 @@ export const IssueModal: React.FC<
         <Box
           component="form"
           autoComplete="off"
-          sx={{ display: "flex", flexDirection: "column" }}
+          sx={{ display: 'flex', flexDirection: 'column' }}
         >
           <TextField
-            {...register("issue", {
-              required: "Campo obrigatório"
+            {...register('issue', {
+              required: 'Campo obrigatório',
             })}
             error={!!errors.info}
             margin="normal"

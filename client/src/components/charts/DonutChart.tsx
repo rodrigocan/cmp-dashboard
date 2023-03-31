@@ -1,5 +1,5 @@
-import ReactApexChart from "react-apexcharts"
-import { Box, Typography, Stack } from "@pankod/refine-mui"
+import ReactApexChart from 'react-apexcharts'
+import { Box, Typography, Stack } from '@pankod/refine-mui'
 
 interface DonutChartProps {
   title: string
@@ -8,7 +8,12 @@ interface DonutChartProps {
   colors: Array<string>
 }
 
-export const DonutChart = ({ title, value, series, colors }: DonutChartProps) => {
+export const DonutChart = ({
+  title,
+  value,
+  series,
+  colors,
+}: DonutChartProps) => {
   return (
     <Box
       id="chart"
@@ -29,23 +34,18 @@ export const DonutChart = ({ title, value, series, colors }: DonutChartProps) =>
         <Typography fontSize={14} color="#808191">
           {title}
         </Typography>
-        <Typography
-          fontSize={24}
-          color="#11142d"
-          fontWeight={700}
-          mt={1}
-        >
+        <Typography fontSize={24} color="#11142d" fontWeight={700} mt={1}>
           {value}
         </Typography>
       </Stack>
 
       <ReactApexChart
         options={{
-          chart: { type: "donut" },
+          chart: { type: 'donut' },
           colors,
           legend: { show: false },
           dataLabels: { enabled: false },
-          labels: ["Em aberto", "Em andamento", "Resolvidos"],
+          labels: ['Em aberto', 'Em andamento', 'Resolvidos'],
         }}
         series={series}
         type="donut"

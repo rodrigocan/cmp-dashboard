@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import { Typography, Paper, Stack } from "@pankod/refine-mui"
-import { useShow, useDelete } from "@pankod/refine-core"
-import { useNavigate, useParams } from "@pankod/refine-react-router-v6"
-import { Edit, Delete } from "@mui/icons-material"
+import { Typography, Paper, Stack } from '@pankod/refine-mui'
+import { useShow, useDelete } from '@pankod/refine-core'
+import { useNavigate, useParams } from '@pankod/refine-react-router-v6'
+import { Edit, Delete } from '@mui/icons-material'
 
-import { CustomButton } from "components"
+import { CustomButton } from 'components'
 
 const SectorDetails = () => {
   const navigate = useNavigate()
@@ -25,44 +25,31 @@ const SectorDetails = () => {
   }
 
   const handleDeleteSector = () => {
-    const response = confirm(
-      "Tem certeza que deseja excluir este setor?"
-    )
+    const response = confirm('Tem certeza que deseja excluir este setor?')
 
     if (response) {
       mutate(
         {
-          resource: "sectors",
-          id: id as string
+          resource: 'sectors',
+          id: id as string,
         },
         {
           onSuccess: () => {
-            navigate("/sectors")
-          }
-        }
+            navigate('/sectors')
+          },
+        },
       )
     }
   }
 
   return (
-    <Paper sx={{ height: "100%", padding: "12px" }}>
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Typography
-          fontSize={24}
-          fontWeight={700}
-          color="#11142D"
-        >
+    <Paper sx={{ height: '100%', padding: '12px' }}>
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography fontSize={24} fontWeight={700} color="#11142D">
           Setor:
         </Typography>
 
-        <Stack
-          direction="row"
-          gap={2}
-        >
+        <Stack direction="row" gap={2}>
           <CustomButton
             title="Editar"
             backgroundColor="#475BE8"
@@ -80,17 +67,13 @@ const SectorDetails = () => {
           />
         </Stack>
       </Stack>
-      <Typography
-        fontSize={20}
-        fontWeight={700}
-        color="#11142D"
-      >
+      <Typography fontSize={20} fontWeight={700} color="#11142D">
         {sectorDetails.name}
       </Typography>
       <Typography>Telefone: {sectorDetails.phone}</Typography>
       <Typography>E-mail: {sectorDetails.contactEmail}</Typography>
       <Typography>Imóvel: {sectorDetails.locationProperty.name}</Typography>
-    </Paper >
+    </Paper>
   )
 }
 

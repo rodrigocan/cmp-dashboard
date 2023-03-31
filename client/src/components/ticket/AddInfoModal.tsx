@@ -1,24 +1,23 @@
-import { HttpError } from "@pankod/refine-core"
-import { SaveButton } from "@pankod/refine-mui"
-
+import { HttpError } from '@pankod/refine-core'
 import {
+  SaveButton,
   Box,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
-  TextField
-} from "@pankod/refine-mui"
+  TextField,
+} from '@pankod/refine-mui'
 
-import { UseModalFormReturnType } from "@pankod/refine-react-hook-form"
+import { UseModalFormReturnType } from '@pankod/refine-react-hook-form'
 
 export interface ProgressInfo {
   _id?: string
   date_time: Date
   user_email: string
   info: string
-  updateType: "info" | "issue" | "solution"
+  updateType: 'info' | 'issue' | 'solution'
 }
 
 export const AddInfoModal: React.FC<
@@ -27,7 +26,7 @@ export const AddInfoModal: React.FC<
   saveButtonProps,
   modal: { visible, close },
   register,
-  formState: { errors }
+  formState: { errors },
 }) => {
   return (
     <Dialog
@@ -40,11 +39,11 @@ export const AddInfoModal: React.FC<
         <Box
           component="form"
           autoComplete="off"
-          sx={{ display: "flex", flexDirection: "column" }}
+          sx={{ display: 'flex', flexDirection: 'column' }}
         >
           <TextField
-            {...register("info", {
-              required: "Campo obrigatório"
+            {...register('info', {
+              required: 'Campo obrigatório',
             })}
             error={!!errors.info}
             margin="normal"

@@ -1,17 +1,17 @@
-import { FieldValues, useForm } from "@pankod/refine-react-hook-form"
+import { FieldValues, useForm } from '@pankod/refine-react-hook-form'
 
-import EditSectorForm from "components/sector/EditSectorForm"
+import EditSectorForm from 'components/sector/EditSectorForm'
 
 const EditSector = () => {
   const {
     refineCore: { onFinish, formLoading },
     register,
-    handleSubmit
+    handleSubmit,
   } = useForm()
 
   const onFinishHandler = async (data: FieldValues) => {
     await onFinish({
-      ...data
+      ...data,
     })
   }
 

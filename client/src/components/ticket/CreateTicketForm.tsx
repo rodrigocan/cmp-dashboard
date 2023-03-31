@@ -1,4 +1,4 @@
-import { HttpError, useList, useCustom } from "@pankod/refine-core"
+import { HttpError, useList, useCustom } from '@pankod/refine-core'
 import {
   Box,
   Stack,
@@ -8,13 +8,13 @@ import {
   TextField,
   Select,
   MenuItem,
-  Button
-} from "@pankod/refine-mui"
+  Button,
+} from '@pankod/refine-mui'
 
-import { TicketFormProps } from "interfaces/common"
-import CustomButton from "components/common/CustomButton"
+import { TicketFormProps } from 'interfaces/common'
+import CustomButton from 'components/common/CustomButton'
 
-import { cities } from "components/common/cities"
+import { cities } from 'components/common/cities'
 
 interface IProperty {
   _id: string
@@ -43,29 +43,28 @@ const CreateTicketForm = ({
   handleImageChange,
   formLoading,
   onFinishHandler,
-  ticketImage
-
+  ticketImage,
 }: TicketFormProps) => {
   const { data: propertiesData } = useList<IProperty, HttpError>({
-    resource: "properties",
+    resource: 'properties',
     config: {
       filters: [
         {
-          field: "city",
-          operator: "eq",
-          value: watch("city")
-        }
-      ]
+          field: 'city',
+          operator: 'eq',
+          value: watch('city'),
+        },
+      ],
     },
     queryOptions: {
-      enabled: !!watch("city")
-    }
+      enabled: !!watch('city'),
+    },
   })
 
   const properties = propertiesData?.data ?? []
 
   const { data: sectorsData } = useList<ISector, HttpError>({
-    resource: "sectors",
+    resource: 'sectors',
     // config: {
     //   filters: [
     //     {
@@ -76,30 +75,38 @@ const CreateTicketForm = ({
     //   ]
     // },
     queryOptions: {
-      enabled: !!watch("property")
-    }
+      enabled: !!watch('property'),
+    },
   })
 
   const sectors = sectorsData?.data ?? []
-  const filteredSectors = sectors.filter((sector) => sector.locationProperty.name === watch("property"))
+  const filteredSectors = sectors.filter(
+    (sector) => sector.locationProperty.name === watch('property'),
+  )
 
   const { data: servicesData } = useCustom<IService[], HttpError>({
-    url: "http://localhost:8080/api/v1/services",
-    method: "get"
+    url: 'http://localhost:8080/api/v1/services',
+    method: 'get',
   })
 
   const servicesObjects = servicesData?.data ?? []
-  const subjects = [...new Set(servicesObjects.map((service) => service.subject))].sort()
+  const subjects = [
+    ...new Set(servicesObjects.map((service) => service.subject)),
+  ].sort()
   const themes = [
-    ...new Set(servicesObjects
-      .filter((service) => service.subject === watch("subject"))
-      .map((service) => service.theme))
+    ...new Set(
+      servicesObjects
+        .filter((service) => service.subject === watch('subject'))
+        .map((service) => service.theme),
+    ),
   ].sort()
   const services = [
-    ...new Set(servicesObjects
-      .filter((service) => service.subject === watch("subject"))
-      .filter((service) => service.theme === watch("theme"))
-      .map((service) => service.name))
+    ...new Set(
+      servicesObjects
+        .filter((service) => service.subject === watch('subject'))
+        .filter((service) => service.theme === watch('theme'))
+        .map((service) => service.name),
+    ),
   ]
 
   return (
@@ -108,19 +115,14 @@ const CreateTicketForm = ({
         {type} de Chamado
       </Typography>
 
-      <Box
-        mt={2.5}
-        borderRadius="15px"
-        padding="20px"
-        bgcolor="#fcfcfc"
-      >
+      <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
           style={{
-            marginTop: "20px",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px"
+            marginTop: '20px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
           }}
           onSubmit={handleSubmit(onFinishHandler)}
         >
@@ -128,30 +130,33 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione a cidade
             </FormHelperText>
             <Select
-              onChange={(e) => setValue(
-                "city",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'city',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
               variant="outlined"
               color="info"
               displayEmpty
               required
-              inputProps={{ "aria-label": "Without label" }}
-              {...register("city", { required: true })}
+              inputProps={{ 'aria-label': 'Without label' }}
+              {...register('city', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
               {cities.map((city) => (
-                <MenuItem key={city} value={city}>{city}</MenuItem>
+                <MenuItem key={city} value={city}>
+                  {city}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -160,26 +165,30 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione o imóvel
             </FormHelperText>
             <Select
-              onChange={(e) => setValue(
-                "property",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'property',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
-              {...register("property", { required: true })}
+              {...register('property', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
-              {properties.length > 0 && properties.map((property) => (
-                <MenuItem key={property._id} value={property.name}>{property.name}</MenuItem>
-              ))}
+              {properties.length > 0 &&
+                properties.map((property) => (
+                  <MenuItem key={property._id} value={property.name}>
+                    {property.name}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 
@@ -187,26 +196,30 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione o setor
             </FormHelperText>
             <Select
-              onChange={(e) => setValue(
-                "sector",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'sector',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
-              {...register("sector", { required: true })}
+              {...register('sector', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
-              {filteredSectors.length > 0 && filteredSectors.map((sector) => (
-                <MenuItem key={sector._id} value={sector.name}>{sector.name}</MenuItem>
-              ))}
+              {filteredSectors.length > 0 &&
+                filteredSectors.map((sector) => (
+                  <MenuItem key={sector._id} value={sector.name}>
+                    {sector.name}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 
@@ -214,9 +227,9 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Preencha com o seu nome
@@ -227,7 +240,7 @@ const CreateTicketForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("requester", { required: true })}
+              {...register('requester', { required: true })}
             />
           </FormControl>
 
@@ -235,9 +248,9 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Preencha com o seu telefone de contato
@@ -248,7 +261,7 @@ const CreateTicketForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("contact_phone", { required: true })}
+              {...register('contact_phone', { required: true })}
             />
           </FormControl>
 
@@ -256,9 +269,9 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Preencha com o seu e-mail de contato
@@ -269,7 +282,7 @@ const CreateTicketForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("contact_email", { required: true })}
+              {...register('contact_email', { required: true })}
             />
           </FormControl>
 
@@ -277,26 +290,30 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione a especialidade do serviço
             </FormHelperText>
             <Select
-              onChange={(e) => setValue(
-                "subject",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'subject',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
-              {...register("subject", { required: true })}
+              {...register('subject', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
-              {subjects.length > 0 && subjects.map((subject) => (
-                <MenuItem key={subject} value={subject}>{subject}</MenuItem>
-              ))}
+              {subjects.length > 0 &&
+                subjects.map((subject) => (
+                  <MenuItem key={subject} value={subject}>
+                    {subject}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 
@@ -304,27 +321,31 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione o tipo do serviço
             </FormHelperText>
 
             <Select
-              onChange={(e) => setValue(
-                "theme",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'theme',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
-              {...register("theme", { required: true })}
+              {...register('theme', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
-              {themes.length > 0 && themes.map((theme) => (
-                <MenuItem key={theme} value={theme}>{theme}</MenuItem>
-              ))}
+              {themes.length > 0 &&
+                themes.map((theme) => (
+                  <MenuItem key={theme} value={theme}>
+                    {theme}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 
@@ -332,27 +353,31 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione o serviço
             </FormHelperText>
 
             <Select
-              onChange={(e) => setValue(
-                "service",
-                typeof e.target.value === "string"
-                  ? e.target.value : ""
-              )}
+              onChange={(e) =>
+                setValue(
+                  'service',
+                  typeof e.target.value === 'string' ? e.target.value : '',
+                )
+              }
               defaultValue=""
-              {...register("service", { required: true })}
+              {...register('service', { required: true })}
             >
               <MenuItem value="">-</MenuItem>
-              {services.length > 0 && services.map((service) => (
-                <MenuItem key={service} value={service}>{service}</MenuItem>
-              ))}
+              {services.length > 0 &&
+                services.map((service) => (
+                  <MenuItem key={service} value={service}>
+                    {service}
+                  </MenuItem>
+                ))}
             </Select>
           </FormControl>
 
@@ -360,9 +385,9 @@ const CreateTicketForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Descreva a demanda
@@ -376,16 +401,11 @@ const CreateTicketForm = ({
               variant="outlined"
               multiline
               minRows={4}
-              {...register("description", { required: true })}
+              {...register('description', { required: true })}
             />
           </FormControl>
 
-          <Stack
-            direction="column"
-            gap={1}
-            justifyContent="center"
-            mb={2}
-          >
+          <Stack direction="column" gap={1} justifyContent="center" mb={2}>
             <Stack direction="row" gap={2}>
               <Typography
                 color="#11142d"
@@ -399,10 +419,10 @@ const CreateTicketForm = ({
               <Button
                 component="label"
                 sx={{
-                  width: "fit-content",
-                  color: "#2ed480",
-                  textTransform: "capitalize",
-                  fontSize: 16
+                  width: 'fit-content',
+                  color: '#2ed480',
+                  textTransform: 'capitalize',
+                  fontSize: 16,
                 }}
               >
                 Anexar
@@ -410,10 +430,8 @@ const CreateTicketForm = ({
                   hidden
                   accept="image/*"
                   type="file"
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement>,
-                  ) => {
-                    handleImageChange(e.target.files![0]);
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleImageChange(e.target.files![0])
                   }}
                 />
               </Button>
@@ -421,7 +439,7 @@ const CreateTicketForm = ({
             <Typography
               fontSize={14}
               color="#808191"
-              sx={{ workBreak: "break-all" }}
+              sx={{ workBreak: 'break-all' }}
             >
               {ticketImage?.name}
             </Typography>
@@ -429,7 +447,7 @@ const CreateTicketForm = ({
 
           <CustomButton
             type="submit"
-            title={formLoading ? "Enviando..." : "Enviar"}
+            title={formLoading ? 'Enviando...' : 'Enviar'}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />

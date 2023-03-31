@@ -1,20 +1,20 @@
-import { useGetIdentity } from "@pankod/refine-core"
-import { FieldValues, useForm } from "@pankod/refine-react-hook-form"
+import { useGetIdentity } from '@pankod/refine-core'
+import { FieldValues, useForm } from '@pankod/refine-react-hook-form'
 
-import CreateSectorForm from "components/sector/CreateSectorForm"
+import CreateSectorForm from 'components/sector/CreateSectorForm'
 
 const CreateSector = () => {
   const { data: user } = useGetIdentity()
   const {
     refineCore: { onFinish, formLoading },
     register,
-    handleSubmit
+    handleSubmit,
   } = useForm()
 
   const onFinishHandler = async (data: FieldValues) => {
     await onFinish({
       ...data,
-      email: user.email
+      email: user.email,
     })
   }
 

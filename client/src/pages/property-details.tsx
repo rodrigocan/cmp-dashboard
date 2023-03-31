@@ -1,10 +1,10 @@
 /* eslint-disable no-restricted-globals */
-import { Typography, Box, Stack } from "@pankod/refine-mui"
-import { useShow, useDelete } from "@pankod/refine-core"
-import { useNavigate, useParams } from "@pankod/refine-react-router-v6"
-import { Place, Edit, Delete } from "@mui/icons-material"
+import { Typography, Box, Stack } from '@pankod/refine-mui'
+import { useShow, useDelete } from '@pankod/refine-core'
+import { useNavigate, useParams } from '@pankod/refine-react-router-v6'
+import { Place, Edit, Delete } from '@mui/icons-material'
 
-import { CustomButton } from "components"
+import { CustomButton } from 'components'
 
 const PropertyDetails = () => {
   const navigate = useNavigate()
@@ -25,21 +25,19 @@ const PropertyDetails = () => {
   }
 
   const handleDeleteProperty = () => {
-    const response = confirm(
-      "Tem certeza que deseja excluir este imóvel?"
-    )
+    const response = confirm('Tem certeza que deseja excluir este imóvel?')
 
     if (response) {
       mutate(
         {
-          resource: "properties",
-          id: id as string
+          resource: 'properties',
+          id: id as string,
         },
         {
           onSuccess: () => {
-            navigate("/properties")
-          }
-        }
+            navigate('/properties')
+          },
+        },
       )
     }
   }
@@ -51,29 +49,20 @@ const PropertyDetails = () => {
       bgcolor="#FCFCFC"
       width="fit-content"
     >
-      <Stack
-        direction="row"
-        justifyContent="space-between"
-        alignItems="center"
-      >
-        <Typography
-          fontSize={24}
-          fontWeight={700}
-          color="#11142D"
-        >
+      <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Typography fontSize={24} fontWeight={700} color="#11142D">
           Imóvel
         </Typography>
 
-        <Stack
-          direction="row"
-          gap={2}
-        >
+        <Stack direction="row" gap={2}>
           <CustomButton
             title="Editar"
             backgroundColor="#475BE8"
             color="#FCFCFC"
             icon={<Edit />}
-            handleClick={() => navigate(`/properties/edit/${propertyDetails._id}`)}
+            handleClick={() =>
+              navigate(`/properties/edit/${propertyDetails._id}`)
+            }
           />
 
           <CustomButton
@@ -91,7 +80,7 @@ const PropertyDetails = () => {
       <Box
         mt="20px"
         display="flex"
-        flexDirection={{ xs: "column", lg: "row" }}
+        flexDirection={{ xs: 'column', lg: 'row' }}
         gap={4}
       >
         <Box flex={1} maxWidth={764}>
@@ -99,7 +88,7 @@ const PropertyDetails = () => {
             src={propertyDetails.photo}
             alt={`Foto do imóvel ${propertyDetails.name}`}
             height={546}
-            style={{ objectFit: "cover", borderRadius: "10px" }}
+            style={{ objectFit: 'cover', borderRadius: '10px' }}
             className="property_details-img"
           />
 
@@ -120,19 +109,11 @@ const PropertyDetails = () => {
                 >
                   {propertyDetails.name}
                 </Typography>
-                <Typography
-                  fontSize={18}
-                  fontWeight={600}
-                >
+                <Typography fontSize={18} fontWeight={600}>
                   {propertyDetails.city}
                 </Typography>
-                <Stack
-                  mt={0.5}
-                  direction="row"
-                  alignItems="center"
-                  gap={0.5}
-                >
-                  <Place sx={{ color: "#808191" }} />
+                <Stack mt={0.5} direction="row" alignItems="center" gap={0.5}>
+                  <Place sx={{ color: '#808191' }} />
                   <Typography fontSize={14} color="#808191">
                     {`${propertyDetails.address}, CEP: ${propertyDetails.zip_code}`}
                   </Typography>

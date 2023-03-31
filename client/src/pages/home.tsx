@@ -1,11 +1,8 @@
-import { useCustom } from "@pankod/refine-core"
+import { useCustom } from '@pankod/refine-core'
 
-import {
-  Box,
-  Typography
-} from "@pankod/refine-mui"
+import { Box, Typography } from '@pankod/refine-mui'
 
-import { DonutChart } from "components/charts/DonutChart"
+import { DonutChart } from 'components/charts/DonutChart'
 
 interface Subject {
   _id: string
@@ -17,8 +14,8 @@ interface Subject {
 
 const Home = () => {
   const { data, isLoading, isError } = useCustom({
-    url: "http://localhost:8080/api/v1/summary",
-    method: "get"
+    url: 'http://localhost:8080/api/v1/summary',
+    method: 'get',
   })
 
   const summary = data?.data ?? []
@@ -36,8 +33,12 @@ const Home = () => {
         <DonutChart
           title="Total de chamados"
           value={summary.totalTickets}
-          series={[summary.openTickets, summary.inProgressTickets, summary.resolvedTickets]}
-          colors={["#FF5722", "#FFC107", "#22FF00"]}
+          series={[
+            summary.openTickets,
+            summary.inProgressTickets,
+            summary.resolvedTickets,
+          ]}
+          colors={['#FF5722', '#FFC107', '#22FF00']}
         />
 
         {summary.ticketsBySubject?.map((subject: Subject) => (
@@ -45,8 +46,12 @@ const Home = () => {
             key={subject._id}
             title={subject._id}
             value={subject.totalTickets}
-            series={[subject.openTickets, subject.inProgressTickets, subject.resolvedTickets]}
-            colors={["#FF5722", "#FFC107", "#22FF00"]}
+            series={[
+              subject.openTickets,
+              subject.inProgressTickets,
+              subject.resolvedTickets,
+            ]}
+            colors={['#FF5722', '#FFC107', '#22FF00']}
           />
         ))}
       </Box>

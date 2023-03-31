@@ -3,19 +3,18 @@ import {
   Typography,
   FormControl,
   FormHelperText,
-  TextField
-} from "@pankod/refine-mui"
+  TextField,
+} from '@pankod/refine-mui'
 
-import { SectorFormProps } from
-  "interfaces/common"
-import CustomButton from "components/common/CustomButton"
+import { SectorFormProps } from 'interfaces/common'
+import CustomButton from 'components/common/CustomButton'
 
 const EditSectorForm = ({
   type,
   register,
   handleSubmit,
   formLoading,
-  onFinishHandler
+  onFinishHandler,
 }: SectorFormProps) => {
   return (
     <Box>
@@ -26,11 +25,11 @@ const EditSectorForm = ({
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
           style={{
-            marginTop: "20px",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px"
+            marginTop: '20px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
           }}
           onSubmit={handleSubmit(onFinishHandler)}
         >
@@ -38,9 +37,9 @@ const EditSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o nome do setor
@@ -52,7 +51,7 @@ const EditSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
             />
           </FormControl>
 
@@ -60,9 +59,9 @@ const EditSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o telefone do setor
@@ -73,7 +72,7 @@ const EditSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("phone", { required: true })}
+              {...register('phone', { required: true })}
             />
           </FormControl>
 
@@ -81,9 +80,9 @@ const EditSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o e-mail de contato do setor
@@ -94,13 +93,13 @@ const EditSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("contactEmail", { required: true })}
+              {...register('contactEmail', { required: true })}
             />
           </FormControl>
 
           <CustomButton
             type="submit"
-            title={formLoading ? "Salvando..." : "Salvar"}
+            title={formLoading ? 'Salvando...' : 'Salvar'}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />

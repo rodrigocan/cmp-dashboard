@@ -1,6 +1,5 @@
-import { useGetIdentity, HttpError } from "@pankod/refine-core"
-import { useModalForm } from "@pankod/refine-react-hook-form"
-import { useShow } from "@pankod/refine-core"
+import { useGetIdentity, HttpError, useShow } from '@pankod/refine-core'
+import { useModalForm } from '@pankod/refine-react-hook-form'
 import {
   Show,
   TextFieldComponent as TextField,
@@ -14,13 +13,17 @@ import {
   TableHead,
   TableRow,
   Button,
-  Chip
-} from "@pankod/refine-mui"
-import { InfoOutlined, TroubleshootOutlined, AssignmentTurnedInOutlined } from "@mui/icons-material"
+  Chip,
+} from '@pankod/refine-mui'
+import {
+  InfoOutlined,
+  TroubleshootOutlined,
+  AssignmentTurnedInOutlined,
+} from '@mui/icons-material'
 
-import { AddInfoModal, ProgressInfo } from "components/ticket/AddInfoModal"
-import { IssueModal, IssueInfo } from "components/ticket/IssueModal"
-import { SolutionModal, SolutionInfo } from "components/ticket/SolutionModal"
+import { AddInfoModal, ProgressInfo } from 'components/ticket/AddInfoModal'
+import { IssueModal, IssueInfo } from 'components/ticket/IssueModal'
+import { SolutionModal, SolutionInfo } from 'components/ticket/SolutionModal'
 
 const TicketDetails = () => {
   const { queryResult } = useShow()
@@ -30,115 +33,124 @@ const TicketDetails = () => {
 
   const { data: user } = useGetIdentity()
 
-  const addInfoModalFormProps = useModalForm<
-    ProgressInfo,
-    HttpError
-  >({
-    refineCoreProps: { action: "edit", redirect: "show" },
+  const addInfoModalFormProps = useModalForm<ProgressInfo, HttpError>({
+    refineCoreProps: { action: 'edit', redirect: 'show' },
     values: {
       user_email: user?.email,
-      updateType: "info"
-    }
+      updateType: 'info',
+    },
   })
 
-  const issueModalFormProps = useModalForm<
-    IssueInfo,
-    HttpError
-  >({
-    refineCoreProps: { action: "edit", redirect: "show" },
+  const issueModalFormProps = useModalForm<IssueInfo, HttpError>({
+    refineCoreProps: { action: 'edit', redirect: 'show' },
     values: {
       user_email: user?.email,
-      updateType: "issue"
-    }
+      updateType: 'issue',
+    },
   })
 
-  const solutionModalFormProps = useModalForm<
-    SolutionInfo,
-    HttpError
-  >({
-    refineCoreProps: { action: "edit", redirect: "show" },
+  const solutionModalFormProps = useModalForm<SolutionInfo, HttpError>({
+    refineCoreProps: { action: 'edit', redirect: 'show' },
     values: {
       user_email: user?.email,
-      updateType: "solution"
-    }
+      updateType: 'solution',
+    },
   })
 
   const {
-    modal: { show: showAddInfoModal }
+    modal: { show: showAddInfoModal },
   } = addInfoModalFormProps
 
   const {
-    modal: { show: showIssueModal }
+    modal: { show: showIssueModal },
   } = issueModalFormProps
 
   const {
-    modal: { show: showSolutionModal }
+    modal: { show: showSolutionModal },
   } = solutionModalFormProps
 
-  const hasIssue = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "issue")
-  const issue = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "issue")?.info
+  const hasIssue = ticket?.progress_info?.some(
+    (info: ProgressInfo) => info.updateType === 'issue',
+  )
+  const issue = ticket?.progress_info?.find(
+    (info: ProgressInfo) => info.updateType === 'issue',
+  )?.info
 
-  const hasSolution = ticket?.progress_info?.some((info: ProgressInfo) => info.updateType === "solution")
-  const solution = ticket?.progress_info?.find((info: ProgressInfo) => info.updateType === "solution")?.info
+  const hasSolution = ticket?.progress_info?.some(
+    (info: ProgressInfo) => info.updateType === 'solution',
+  )
+  const solution = ticket?.progress_info?.find(
+    (info: ProgressInfo) => info.updateType === 'solution',
+  )?.info
 
   return (
     <Show isLoading={isLoading}>
       <Stack gap={1}>
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Stack gap={1} direction="row" alignItems="center">
             <Typography variant="body1" fontWeight="bold">
               ID:
             </Typography>
-            <TextField value={ticket?._id ?? ""} />
+            <TextField value={ticket?._id ?? ''} />
           </Stack>
           <Chip
             sx={{ fontSize: 18, fontWeight: 700 }}
             label={ticket?.status}
-            color={ticket?.status === "Em aberto" ? "error"
-              : ticket?.status === "Em andamento" ? "warning"
-              : "success"}
+            color={
+              ticket?.status === 'Em aberto'
+                ? 'error'
+                : ticket?.status === 'Em andamento'
+                ? 'warning'
+                : 'success'
+            }
           />
         </Stack>
 
         <Typography variant="body1" fontWeight="bold">
           Cidade:
         </Typography>
-        <TextField value={ticket?.city ?? ""} />
+        <TextField value={ticket?.city ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           Imóvel:
         </Typography>
-        <TextField value={ticket?.property ?? ""} />
+        <TextField value={ticket?.property ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           Setor:
         </Typography>
-        <TextField value={ticket?.sector ?? ""} />
+        <TextField value={ticket?.sector ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           Solicitante
         </Typography>
-        <TextField value={ticket?.requester ?? ""} />
+        <TextField value={ticket?.requester ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           Telefone de contato:
         </Typography>
-        <TextField value={ticket?.contact_phone ?? ""} />
+        <TextField value={ticket?.contact_phone ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           E-mail de contato:
         </Typography>
-        <TextField value={ticket?.contact_email ?? ""} />
+        <TextField value={ticket?.contact_email ?? ''} />
 
         <Typography variant="body1" fontWeight="bold">
           Serviço:
         </Typography>
-        <TextField value={`${ticket?.subject} - ${ticket?.theme} - ${ticket?.service}`} />
+        <TextField
+          value={`${ticket?.subject} - ${ticket?.theme} - ${ticket?.service}`}
+        />
 
         <Typography variant="body1" fontWeight="bold">
           Descrição:
         </Typography>
-        <TextField value={ticket?.description ?? ""} />
+        <TextField value={ticket?.description ?? ''} />
 
         {ticket?.photo && (
           <>
@@ -148,7 +160,7 @@ const TicketDetails = () => {
             <Box
               component="img"
               sx={{
-                width: 400
+                width: 400,
               }}
               src={ticket?.photo}
             />
@@ -160,9 +172,7 @@ const TicketDetails = () => {
             <Typography variant="body1" fontWeight="bold">
               Diagnóstico:
             </Typography>
-            <TextField
-              value={issue ?? ""}
-            />
+            <TextField value={issue ?? ''} />
           </>
         )}
 
@@ -171,9 +181,7 @@ const TicketDetails = () => {
             <Typography variant="body1" fontWeight="bold">
               Solução:
             </Typography>
-            <TextField
-              value={solution ?? ""}
-            />
+            <TextField value={solution ?? ''} />
           </>
         )}
 
@@ -181,38 +189,43 @@ const TicketDetails = () => {
           Aberto em:
         </Typography>
         <TextField
-          value={
-            new Date(ticket?.createdAt).toLocaleString("pt-BR", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit"
-            })
-          }
+          value={new Date(ticket?.createdAt).toLocaleString('pt-BR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         />
 
         <Typography variant="body1" fontWeight="bold">
           Atualizado em:
         </Typography>
         <TextField
-          value={
-            new Date(ticket?.updatedAt).toLocaleString("pt-BR", {
-              year: "numeric",
-              month: "numeric",
-              day: "numeric",
-              hour: "2-digit",
-              minute: "2-digit"
-            })
-          }
+          value={new Date(ticket?.updatedAt).toLocaleString('pt-BR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+          })}
         />
 
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack
+          direction="row"
+          justifyContent="space-between"
+          alignItems="center"
+        >
           <Typography variant="body1" fontWeight="bold">
             Andamento do chamado:
           </Typography>
 
-          <Stack direction="row" justifyContent="space-between" alignItems="center" gap={1}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            alignItems="center"
+            gap={1}
+          >
             <Button
               variant="contained"
               onClick={() => showAddInfoModal(ticket?._id)}
@@ -282,32 +295,37 @@ const TicketDetails = () => {
               </TableRow>
             </TableHead>
             <TableBody>
-              {ticket?.progress_info?.sort(
-                (a: ProgressInfo, b: ProgressInfo) => new Date(b.date_time).getTime() - new Date(a.date_time).getTime()
-              ).map((progress_info: ProgressInfo) => (
-                <TableRow key={progress_info._id}>
-                  <TableCell>
-                    {new Date(progress_info.date_time).toLocaleString("pt-BR", {
-                      year: "numeric",
-                      month: "numeric",
-                      day: "numeric",
-                      hour: "2-digit",
-                      minute: "2-digit"
-                    })}
-                  </TableCell>
-                  <TableCell>{progress_info.user_email}</TableCell>
-                  <TableCell>
-                    {
-                      progress_info.updateType === "issue"
+              {ticket?.progress_info
+                ?.sort(
+                  (a: ProgressInfo, b: ProgressInfo) =>
+                    new Date(b.date_time).getTime() -
+                    new Date(a.date_time).getTime(),
+                )
+                .map((progress_info: ProgressInfo) => (
+                  <TableRow key={progress_info._id}>
+                    <TableCell>
+                      {new Date(progress_info.date_time).toLocaleString(
+                        'pt-BR',
+                        {
+                          year: 'numeric',
+                          month: 'numeric',
+                          day: 'numeric',
+                          hour: '2-digit',
+                          minute: '2-digit',
+                        },
+                      )}
+                    </TableCell>
+                    <TableCell>{progress_info.user_email}</TableCell>
+                    <TableCell>
+                      {progress_info.updateType === 'issue'
                         ? `Diagnóstico: ${progress_info.info}`
-                        : progress_info.updateType === "solution"
-                          ? `Solução: ${progress_info.info}`
-                          : progress_info.info
-                    }
-                  </TableCell>
-                  <TableCell>-</TableCell>
-                </TableRow>
-              ))}
+                        : progress_info.updateType === 'solution'
+                        ? `Solução: ${progress_info.info}`
+                        : progress_info.info}
+                    </TableCell>
+                    <TableCell>-</TableCell>
+                  </TableRow>
+                ))}
             </TableBody>
           </Table>
         </TableContainer>

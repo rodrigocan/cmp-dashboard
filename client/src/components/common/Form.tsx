@@ -8,10 +8,10 @@ import {
   Select,
   MenuItem,
   Button,
-} from "@pankod/refine-mui"
+} from '@pankod/refine-mui'
 
-import { FormProps } from "interfaces/common"
-import CustomButton from "./CustomButton"
+import { FormProps } from 'interfaces/common'
+import CustomButton from './CustomButton'
 
 import { cities } from './cities'
 
@@ -22,7 +22,7 @@ const Form = ({
   handleImageChange,
   formLoading,
   onFinishHandler,
-  propertyImage
+  propertyImage,
 }: FormProps) => {
   return (
     <Box>
@@ -33,11 +33,11 @@ const Form = ({
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
           style={{
-            marginTop: "20px",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px"
+            marginTop: '20px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
           }}
           onSubmit={handleSubmit(onFinishHandler)}
         >
@@ -45,9 +45,9 @@ const Form = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o nome do imóvel
@@ -58,7 +58,7 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
             />
           </FormControl>
 
@@ -66,9 +66,9 @@ const Form = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o endereço do imóvel
@@ -79,7 +79,7 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("address", { required: true })}
+              {...register('address', { required: true })}
             />
           </FormControl>
 
@@ -87,9 +87,9 @@ const Form = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione a cidade do imóvel
@@ -99,11 +99,13 @@ const Form = ({
               color="info"
               displayEmpty
               required
-              inputProps={{ "aria-label": "Without label" }}
-              {...register("city", { required: true })}
+              inputProps={{ 'aria-label': 'Without label' }}
+              {...register('city', { required: true })}
             >
               {cities.map((city) => (
-                <MenuItem key={city} value={city}>{city}</MenuItem>
+                <MenuItem key={city} value={city}>
+                  {city}
+                </MenuItem>
               ))}
             </Select>
           </FormControl>
@@ -112,9 +114,9 @@ const Form = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o CEP do imóvel
@@ -125,16 +127,11 @@ const Form = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("zip_code", { required: true })}
+              {...register('zip_code', { required: true })}
             />
           </FormControl>
 
-          <Stack
-            direction="column"
-            gap={1}
-            justifyContent="center"
-            mb={2}
-          >
+          <Stack direction="column" gap={1} justifyContent="center" mb={2}>
             <Stack direction="row" gap={2}>
               <Typography
                 color="#11142d"
@@ -148,10 +145,10 @@ const Form = ({
               <Button
                 component="label"
                 sx={{
-                  width: "fit-content",
-                  color: "#2ed480",
-                  textTransform: "capitalize",
-                  fontSize: 16
+                  width: 'fit-content',
+                  color: '#2ed480',
+                  textTransform: 'capitalize',
+                  fontSize: 16,
                 }}
               >
                 Upload *
@@ -159,10 +156,8 @@ const Form = ({
                   hidden
                   accept="image/*"
                   type="file"
-                  onChange={(
-                    e: React.ChangeEvent<HTMLInputElement>,
-                  ) => {
-                    handleImageChange(e.target.files![0]);
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    handleImageChange(e.target.files![0])
                   }}
                 />
               </Button>
@@ -170,7 +165,7 @@ const Form = ({
             <Typography
               fontSize={14}
               color="#808191"
-              sx={{ wordBreak: "break-all" }}
+              sx={{ wordBreak: 'break-all' }}
             >
               {propertyImage?.name}
             </Typography>
@@ -178,7 +173,7 @@ const Form = ({
 
           <CustomButton
             type="submit"
-            title={formLoading ? "Cadastrando..." : "Cadastrar"}
+            title={formLoading ? 'Cadastrando...' : 'Cadastrar'}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />

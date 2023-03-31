@@ -1,37 +1,37 @@
-import { useState } from "react"
-import { useGetIdentity } from "@pankod/refine-core"
-import { FieldValues, useForm } from "@pankod/refine-react-hook-form"
-import Form from "components/common/Form"
+import { useState } from 'react'
+import { useGetIdentity } from '@pankod/refine-core'
+import { FieldValues, useForm } from '@pankod/refine-react-hook-form'
+import Form from 'components/common/Form'
 
 const EditProperty = () => {
   const { data: user } = useGetIdentity()
-  const [propertyImage, setPropertyImage] = useState({ name: "", url: "" })
+  const [propertyImage, setPropertyImage] = useState({ name: '', url: '' })
   const {
     refineCore: { onFinish, formLoading },
     register,
-    handleSubmit
+    handleSubmit,
   } = useForm()
 
   const handleImageChange = (file: File) => {
     const reader = (readFile: File) =>
       new Promise<string>((resolve, reject) => {
-        const fileReader = new FileReader();
-        fileReader.onload = () => resolve(fileReader.result as string);
+        const fileReader = new FileReader()
+        fileReader.onload = () => resolve(fileReader.result as string)
         fileReader.readAsDataURL(readFile)
       })
 
     reader(file).then((result: string) =>
-      setPropertyImage({ name: file?.name, url: result })
+      setPropertyImage({ name: file?.name, url: result }),
     )
   }
 
   const onFinishHandler = async (data: FieldValues) => {
-    if (!propertyImage.name) return alert("Por favor, selecione uma imagem");
+    if (!propertyImage.name) return alert('Por favor, selecione uma imagem')
 
     await onFinish({
       ...data,
       photo: propertyImage.url,
-      email: user.email
+      email: user.email,
     })
   }
 

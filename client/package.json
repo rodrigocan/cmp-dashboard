@@ -43,7 +43,9 @@
     "build": "refine build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "refine": "refine"
+    "refine": "refine",
+    "lint": "eslint src --ext .ts,.tsx",
+    "lint:fix": "eslint src --ext .ts,.tsx --fix"
   },
   "eslintConfig": {
     "extends": [

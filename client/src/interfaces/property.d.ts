@@ -1,4 +1,4 @@
-import { BaseKey } from "@pankod/refine-core"
+import { BaseKey } from '@pankod/refine-core'
 
 export interface FormValues {
   name: string

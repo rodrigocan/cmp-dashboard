@@ -1,9 +1,5 @@
-import React from "react";
-import {
-  useGetIdentity,
-  useGetLocale,
-  useSetLocale,
-} from "@pankod/refine-core";
+import React from 'react'
+import { useGetIdentity, useGetLocale, useSetLocale } from '@pankod/refine-core'
 import {
   AppBar,
   Avatar,
@@ -13,20 +9,25 @@ import {
   Select,
   Toolbar,
   Typography,
-} from "@pankod/refine-mui";
+} from '@pankod/refine-mui'
 
-import i18n from "i18n";
+import i18n from 'i18n'
 
 export const Header: React.FC = () => {
-  const changeLanguage = useSetLocale();
-  const locale = useGetLocale();
-  const currentLocale = locale();
+  const changeLanguage = useSetLocale()
+  const locale = useGetLocale()
+  const currentLocale = locale()
 
-  const { data: user } = useGetIdentity();
-  const showUserInfo = user && (user.name || user.avatar);
+  const { data: user } = useGetIdentity()
+  const showUserInfo = user && (user.name || user.avatar)
 
   return (
-    <AppBar color="default" position="sticky" elevation={0} sx={{ background: '#fcfcfc' }}>
+    <AppBar
+      color="default"
+      position="sticky"
+      elevation={0}
+      sx={{ background: '#fcfcfc' }}
+    >
       <Toolbar>
         <Stack
           direction="row"
@@ -38,7 +39,7 @@ export const Header: React.FC = () => {
             <Select
               disableUnderline
               defaultValue={currentLocale}
-              inputProps={{ "aria-label": "Without label" }}
+              inputProps={{ 'aria-label': 'Without label' }}
               variant="standard"
             >
               {[...(i18n.languages ?? [])].sort().map((lang: string) => (
@@ -47,7 +48,7 @@ export const Header: React.FC = () => {
                   key={lang}
                   defaultValue={lang}
                   onClick={() => {
-                    changeLanguage(lang);
+                    changeLanguage(lang)
                   }}
                   value={lang}
                 >
@@ -58,13 +59,13 @@ export const Header: React.FC = () => {
                   >
                     <Avatar
                       sx={{
-                        width: "16px",
-                        height: "16px",
-                        marginRight: "5px",
+                        width: '16px',
+                        height: '16px',
+                        marginRight: '5px',
                       }}
                       src={`/images/flags/${lang}.svg`}
                     />
-                    {lang === "en" ? "English" : "German"}
+                    {lang === 'en' ? 'English' : 'German'}
                   </Stack>
                 </MenuItem>
               ))}
@@ -81,5 +82,5 @@ export const Header: React.FC = () => {
         </Stack>
       </Toolbar>
     </AppBar>
-  );
-};
+  )
+}

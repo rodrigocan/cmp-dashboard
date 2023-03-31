@@ -6,23 +6,22 @@ import {
   TextField,
   Select,
   MenuItem,
-} from "@pankod/refine-mui"
+} from '@pankod/refine-mui'
 
-import { useList } from "@pankod/refine-core"
+import { useList } from '@pankod/refine-core'
 
-import { SectorFormProps } from
-  "interfaces/common"
-import CustomButton from "components/common/CustomButton"
+import { SectorFormProps } from 'interfaces/common'
+import CustomButton from 'components/common/CustomButton'
 
 const CreateSectorForm = ({
   type,
   register,
   handleSubmit,
   formLoading,
-  onFinishHandler
+  onFinishHandler,
 }: SectorFormProps) => {
   const { data } = useList({
-    resource: "properties"
+    resource: 'properties',
   })
 
   const properties = data?.data ?? []
@@ -36,11 +35,11 @@ const CreateSectorForm = ({
       <Box mt={2.5} borderRadius="15px" padding="20px" bgcolor="#fcfcfc">
         <form
           style={{
-            marginTop: "20px",
-            width: "100%",
-            display: "flex",
-            flexDirection: "column",
-            gap: "20px"
+            marginTop: '20px',
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            gap: '20px',
           }}
           onSubmit={handleSubmit(onFinishHandler)}
         >
@@ -48,9 +47,9 @@ const CreateSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o nome do setor
@@ -61,7 +60,7 @@ const CreateSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("name", { required: true })}
+              {...register('name', { required: true })}
             />
           </FormControl>
 
@@ -69,9 +68,9 @@ const CreateSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o telefone do setor
@@ -82,7 +81,7 @@ const CreateSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("phone", { required: true })}
+              {...register('phone', { required: true })}
             />
           </FormControl>
 
@@ -90,9 +89,9 @@ const CreateSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Digite o e-mail de contato do setor
@@ -103,7 +102,7 @@ const CreateSectorForm = ({
               id="outlined-basic"
               color="info"
               variant="outlined"
-              {...register("contactEmail", { required: true })}
+              {...register('contactEmail', { required: true })}
             />
           </FormControl>
 
@@ -111,9 +110,9 @@ const CreateSectorForm = ({
             <FormHelperText
               sx={{
                 fontWeight: 500,
-                margin: "10px 0",
+                margin: '10px 0',
                 fontSize: 16,
-                color: "#11142d"
+                color: '#11142d',
               }}
             >
               Selecione o imóvel de localização do setor
@@ -123,8 +122,8 @@ const CreateSectorForm = ({
               color="info"
               displayEmpty
               required
-              inputProps={{ "aria-label": "Without label" }}
-              {...register("locationProperty", { required: true })}
+              inputProps={{ 'aria-label': 'Without label' }}
+              {...register('locationProperty', { required: true })}
             >
               {properties.map((property) => (
                 <MenuItem key={property._id} value={property._id}>
@@ -136,7 +135,7 @@ const CreateSectorForm = ({
 
           <CustomButton
             type="submit"
-            title={formLoading ? "Cadastrando..." : "Cadastrar"}
+            title={formLoading ? 'Cadastrando...' : 'Cadastrar'}
             backgroundColor="#475be8"
             color="#fcfcfc"
           />
