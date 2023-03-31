@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 import { HttpError, useList, useCustom } from '@pankod/refine-core'
 import {
   Box,

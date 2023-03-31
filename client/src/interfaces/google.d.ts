@@ -1,3 +1,6 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-use-before-define */
 export interface IdConfiguration {
   client_id: string
   auto_select?: boolean
@@ -17,14 +20,14 @@ export interface IdConfiguration {
 export interface CredentialResponse {
   credential?: string
   select_by?:
-    | 'auto'
-    | 'user'
-    | 'user_1tap'
-    | 'user_2tap'
-    | 'btn'
-    | 'btn_confirm'
-    | 'brn_add_session'
-    | 'btn_confirm_add_session'
+  | 'auto'
+  | 'user'
+  | 'user_1tap'
+  | 'user_2tap'
+  | 'btn'
+  | 'btn_confirm'
+  | 'brn_add_session'
+  | 'btn_confirm_add_session'
   clientId?: string
 }
 

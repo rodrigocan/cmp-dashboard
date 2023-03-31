@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable camelcase */
 import { useGetIdentity, HttpError, useShow } from '@pankod/refine-core'
 import { useModalForm } from '@pankod/refine-react-hook-form'
 import {
@@ -104,8 +106,8 @@ const TicketDetails = () => {
               ticket?.status === 'Em aberto'
                 ? 'error'
                 : ticket?.status === 'Em andamento'
-                ? 'warning'
-                : 'success'
+                  ? 'warning'
+                  : 'success'
             }
           />
         </Stack>
@@ -320,8 +322,8 @@ const TicketDetails = () => {
                       {progress_info.updateType === 'issue'
                         ? `Diagnóstico: ${progress_info.info}`
                         : progress_info.updateType === 'solution'
-                        ? `Solução: ${progress_info.info}`
-                        : progress_info.info}
+                          ? `Solução: ${progress_info.info}`
+                          : progress_info.info}
                     </TableCell>
                     <TableCell>-</TableCell>
                   </TableRow>

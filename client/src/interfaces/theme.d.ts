@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-unused-vars */
 import '@pankod/refine-mui'
 
 export interface CustomTheme {
@@ -8,8 +10,8 @@ export interface CustomTheme {
 }
 
 declare module '@pankod/refine-mui' {
-  interface Theme extends import('@pankod/refine-mui').Theme, CustomTheme {}
+  interface Theme extends import('@pankod/refine-mui').Theme, CustomTheme { }
   interface ThemeOptions
     extends import('@pankod/refine-mui').ThemeOptions,
-      CustomTheme {}
+    CustomTheme { }
 }

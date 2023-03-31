@@ -1,3 +1,5 @@
+/* eslint-disable prettier/prettier */
+/* eslint-disable no-undef */
 import { HttpError } from '@pankod/refine-core'
 import {
   SaveButton,
@@ -27,37 +29,37 @@ export const SolutionModal: React.FC<
   register,
   formState: { errors },
 }) => {
-  return (
-    <Dialog
-      open={visible}
-      onClose={close}
-      PaperProps={{ sx: { minWidth: 500 } }}
-    >
-      <DialogTitle>Adicionar solução do chamado</DialogTitle>
-      <DialogContent>
-        <Box
-          component="form"
-          autoComplete="off"
-          sx={{ display: 'flex', flexDirection: 'column' }}
-        >
-          <TextField
-            {...register('solution', {
-              required: 'Campo obrigatório',
-            })}
-            error={!!errors.info}
-            margin="normal"
-            fullWidth
-            label="Solução"
-            name="solution"
-            autoFocus
-            multiline
-          />
-        </Box>
-      </DialogContent>
-      <DialogActions>
-        <Button onClick={close}>Cancelar</Button>
-        <SaveButton {...saveButtonProps}>Adicionar</SaveButton>
-      </DialogActions>
-    </Dialog>
-  )
-}
+    return (
+      <Dialog
+        open={visible}
+        onClose={close}
+        PaperProps={{ sx: { minWidth: 500 } }}
+      >
+        <DialogTitle>Adicionar solução do chamado</DialogTitle>
+        <DialogContent>
+          <Box
+            component="form"
+            autoComplete="off"
+            sx={{ display: 'flex', flexDirection: 'column' }}
+          >
+            <TextField
+              {...register('solution', {
+                required: 'Campo obrigatório',
+              })}
+              error={!!errors.info}
+              margin="normal"
+              fullWidth
+              label="Solução"
+              name="solution"
+              autoFocus
+              multiline
+            />
+          </Box>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={close}>Cancelar</Button>
+          <SaveButton {...saveButtonProps}>Adicionar</SaveButton>
+        </DialogActions>
+      </Dialog>
+    )
+  }

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export interface CustomButtonProps {
   type?: string
   title: string

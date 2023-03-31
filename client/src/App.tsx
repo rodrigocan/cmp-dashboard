@@ -1,3 +1,4 @@
+/* eslint-disable prefer-promise-reject-errors */
 import React from 'react'
 
 import { Refine, AuthProvider } from '@pankod/refine-core'
